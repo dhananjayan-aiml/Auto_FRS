@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include 'header/analytics_header.html' %}
+<head>
+       <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Table</title>
+
+
+
+
+
+
+</head>
+
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+
+    <!-- End of Sidebar -->
+
+
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800">Student Table</h1>
+       <p class="mb-4" >Table Analysis on Subject, Course, Session, Attendance and feedback with all sotring and searching with export table option
+
+        </p>
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+
+                    <div class="my-2" style="float:right;">
+                        <h6>
+                            <span class="icon text-white-50">
+                                <i class="fas fa-check"></i>
+                            </span>
+                            <span class="text"></span>
+                        </h6>
+                    </div>
+                </h6>
+            </div>
+            <div class="card-body">
+                <div style="float:right;">Export Data</div>
+                <div class="table-responsive">
+
+
+                        <table class="table table-bordered"  width="100%" cellspacing="0"  data-show-export="true"  id="table"  data-pagination="True"  data-show-filter-control-switch="true" data-click-to-select="true" data-toggle="Table" data-filter-control="true">
+
+                            <thead>
+        <tr>
+
+            <th data-field="id" >S.No</th>
+            <th data-field="name" data-sortable="True" data-filter-control="input">Name</th>
+            <th data-field="email" data-sortable="True" data-filter-control="input">Email</th>
+            <th data-field="grade"  data-sortable="True" class="col-sm-2" data-filter-control="select"  >Grade</th>
+            <th data-field="scname" data-sortable="True" data-filter-control="input">School Name</th>
+            <th data-field="contact" data-sortable="True" data-filter-control="input">Pincode</th>
+            <th data-field="city" data-sortable="True" data-filter-control="select">District</th>
+             <th data-field="age" data-sortable="True" data-filter-control="select">State</th>
+            <th data-field="details" data-sortable="True" >Details</th>
+
+        </tr>
+
+        </thead>
+
+                            </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+
+
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+
+
+
+
+
+
+
+           <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+<script src="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.js"></script>
+
+
+<!--      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>-->
+<!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
+<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.js"></script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/editable/bootstrap-table-editable.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/export/bootstrap-table-export.js"></script>
+  <script src="https://rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/export/bootstrap-table-export.js"></script>
+
+    <script src="{{url_for('static',filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+
+      <!--student view modal-->
+
+	<div id="dataModal" class="modal fade">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-header">
+   <h4 class="modal-title">Student Details</h4>
+    <button type="button" class="close" data-dismiss="modal">×</button>
+
+   </div>
+   <div class="modal-body">
+      <div class="table-responsive">
+
+        <table class="table table-bordered">
+            <input type="hidden" name="student_id" class="form-control" id="student_id">
+            <tr>
+                <center>  <img src="" id="profile" alt="Avatar" style="width:200px ;  display: flex; border-radius: 50%;"></center>
+                <div id="myModal" class="modal">
+                    <img class="modal-content" id="img01">
+                  </div>
+
+            </tr>
+        <tr>
+            <td width="30%"><label>Student Name</label></td>
+            <td width="70%"><input type="text" name="student_name" class="form-control" id="student_name" disabled></td>
+        </tr>
+        <tr>
+            <td width="30%"><label>Contact</label></td>
+            <td width="70%"><input type="numbers" name="student_contact" class="form-control" id="student_contact" disabled></td>
+        </tr>
+        <tr>
+            <td width="30%"><label>E-mail</label></td>
+            <td width="70%"><input type="email" name="student_email" class="form-control" id="student_email" disabled></td>
+        </tr>
+        <tr>
+            <td width="30%"><label>Student grade</label></td>
+            <td width="70%"><input type="numbers" name="student_grade" class="form-control" id="student_grade" disabled></td>
+        </tr>
+        <tr>
+            <td width="30%"><label>School Name</label></td>
+            <td width="70%"><input type="text" name="school_name" class="form-control" id="school_name" disabled></td>
+        </tr>
+        <tr>
+            <td width="30%"><label>School Board</label></td>
+            <td width="70%"><input type="text" name="school_board" class="form-control" id="school_board" disabled></td>
+        </tr>
+		 <tr>
+            <td width="30%"><label>School Pincode</label></td>
+            <td width="70%"><input type="numbers" name="school_pincode" class="form-control" id="school_pincode" disabled></td>
+        </tr>
+		 <tr>
+            <td width="30%"><label>Whatsapp No</label></td>
+            <td width="70%"><input type="numbers" name="student_whatsapp" class="form-control" id="student_whatsapp" disabled></td>
+        </tr>
+        <tr>
+            <td width="30%"><label>Account Status</label></td>
+            <td width="70%">
+
+                <input type="text" name="student_status" class="form-control" id="student_status" disabled>
+                </td>
+        </tr>
+
+        <tr>
+                            <td width="30%"><label>Photo Id</label></td>
+          <td width="70%"> <center><img id="photo_id" style="width:150px;height:150px;"></center></td>
+        </tr>
+
+    </table>
+	 <div class="modal-footer">
+
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+   </div>
+
+	</div>
+   </div>
+
+
+ <script>
+        var data = [
+        {% for row in student %}
+        {
+        "id": "{{loop.index}}",
+        "name": "{{row.student_name}}",
+        "email": "{{row.student_email}}",
+        "grade": "{{row.student_grade}}",
+        "scname": "{{row.school_name}}",
+        "contact": "{{row.school_pincode}}",
+        "city": "{{row.school_district}}",
+        "age": "{{row.school_state}}",
+        "details":"<a type='button' name='student_details'  class='btn btn-success btn-xs view_data' id='{{row.student_id}}' STYLE='color:white'>VIEW</a>"
+
+      },
+
+      {% endfor %}
+      ];
+
+  $('#table').bootstrapTable({
+          data: data,
+          onCreatedControls () {
+
+            $('select.bootstrap-table-filter-control-city').each(function (index, i) {
+              i.setAttribute('multiple','multiple');
+              $(this).find('option[value=""]').remove();
+              $(this).multipleSelect('destroy').multipleSelect({
+                container: 'body',
+                filter: true,
+                selectAll:true
+
+              })
+            }),
+
+      $('select.bootstrap-table-filter-control-age').each(function (index, i) {
+        i.setAttribute('multiple','multiple');
+        $(this).find('option[value=""]').remove();
+        $(this).multipleSelect('destroy').multipleSelect({
+          container: 'body',
+          filter: true,
+          selectAll:true
+
+        })
+      })
+
+          },
+
+       })
+ var $table = $('#table')
+  $table.bootstrapTable({
+    data: data
+  })
+
+  $('button[name="clearSearch"]').click(function() {
+    $('select.bootstrap-table-filter-control-city').multipleSelect('setSelects', [])
+    filterData()
+  })
+
+window.filterCities=0,
+window.filterCities1=0
+
+  function customFilter(row,filter){
+     filterCities = filter['cities']
+     console.log(filterCities)
+     console.log(filterCities1)
+    if (filterCities1 == 0 || filterCities1 == []){
+      console.log("1")
+    return filterCities.length == 0 || filterCities.includes(row.city)
+    }
+    else if (filterCities == 0 || filterCities == []){
+      console.log("12")
+    return filterCities1.length == 0 || filterCities1.includes(row.age)
+    }
+    else{
+      console.log("2")
+      return filterCities1.length == 0 || filterCities1.includes(row.age) && filterCities.includes(row.city) || filterCities.length == 0
+    }
+  }
+
+  function filterData() {
+    $table.bootstrapTable('filterBy', {
+      cities: $('select.bootstrap-table-filter-control-city').multipleSelect('getSelects')
+    }, {
+      'filterAlgorithm': customFilter
+    })
+  }
+
+  $('select.bootstrap-table-filter-control-city').change(function () {
+    filterData()
+  })
+
+
+
+  $('button[name="clearSearch"]').click(function() {
+    $('select.bootstrap-table-filter-control-age').multipleSelect('setSelects', [])
+    filterData1()
+  })
+
+  function customFilter1(row,filter){
+     filterCities1 = filter['cities1']
+     console.log(filterCities)
+     console.log(filterCities1)
+     if (filterCities == 0 || filterCities == []){
+      console.log("1")
+    return filterCities1.length == 0 || filterCities1.includes(row.age)
+    }
+    else if (filterCities1 == 0 || filterCities1 == []){
+      console.log("12")
+    return filterCities.length == 0 || filterCities.includes(row.city)
+    }
+    else{
+      console.log("2")
+      return filterCities1.length == 0 || filterCities1.includes(row.age) && filterCities.includes(row.city) || filterCities.length == 0
+    }
+  }
+
+  function filterData1() {
+    $table.bootstrapTable('filterBy', {
+      cities1: $('select.bootstrap-table-filter-control-age').multipleSelect('getSelects')
+    }, {
+      'filterAlgorithm': customFilter1
+    })
+  }
+
+  $('select.bootstrap-table-filter-control-age').change(function () {
+    filterData1()
+  })
+
+
+
+      </script>
+
+<script>
+
+   $(document).on('click', '.view_data', function () {
+            var student_id = $(this).attr("id");
+            $.ajax({
+                url: "/admin_analytics/student/select",
+                method: "POST",
+                data: {
+                    student_id: student_id
+                },
+                success: function (data) {
+                    $('#dataModal').modal('show');
+                    var data_rs = JSON.parse(data);
+                    $('#student_id').val(data_rs[0]['student_id']);
+                    $('#student_name').val(data_rs[0]['student_name']);
+                    $('#student_contact').val(data_rs[0]['student_contact']);
+                    $('#student_email').val(data_rs[0]['student_email']);
+                    $('#student_grade').val(data_rs[0]['student_grade']);
+                    $('#student_whatsapp').val(data_rs[0]['student_whatsapp']);
+                    $('#school_name').val(data_rs[0]['school_name']);
+                    $('#school_board').val(data_rs[0]['school_board']);
+                    $('#school_pincode').val(data_rs[0]['school_pincode']);
+
+                    if(data_rs[0]['student_profile'])
+                    {
+                       
+                        $("#profile").attr('src', '/static/'+data_rs[0]['student_profile']);
+                        console.log(data_rs[0]['student_profile']);
+                    }
+                    else
+                    {
+                        document.getElementById("profile").src = "https://www.pinclipart.com/picdir/big/559-5594866_necktie-drawing-vector-round-avatar-user-icon-png.png";
+
+                    }
+
+
+                    if (data_rs[0]['account_status']=='allow')
+                    {
+                    $('#student_status').val(data_rs[0]['account_status']);
+                    $('#student_status').css('color', 'green');
+                     }
+                     else{
+                     $('#student_status').val(data_rs[0]['account_status']);
+                     $('#student_status').css('color', 'red');
+
+                     }
+
+
+
+                     var id = data_rs[0]['student_idcard'];
+
+
+                     $("#photo_id").attr('src', '/static/'+id);
+
+
+
+                }
+            });
+        });
+
+</script>
+
+</body>
+
+</html>

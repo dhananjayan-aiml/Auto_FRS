@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include 'header/data_entry_header.html' %}
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <!-- End of Sidebar -->
+
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">School Details</h1>
+<!--                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i-->
+<!--                        class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>-->
+<a  class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm export-btn" style="color: white;"><i
+    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            </div>
+         <div class="row">
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    Total School</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{count[0]}}</div>
+                            </div>
+                            <div class="col-auto">
+
+                                <i class="fas fa-laptop fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                    Approved School</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{count[1]}}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-user-graduate fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Rejected School
+                                </div>
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col-auto">
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{count[2]}}</div>
+                                    </div>
+                                    <div class="col">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-book-reader fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-warning shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Waiting School
+                                </div>
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col-auto">
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{count[3]}}</div>
+                                    </div>
+                                    <div class="col">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-book-reader fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending Requests Card Example -->
+
+        </div>
+        </div>
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6>
+
+							<div class="my-2" style="float:right;">
+
+                                    &nbsp;
+                                    <button href="#" class="btn btn-primary btn-icon-split" data-toggle="modal" data-target="#add_data_Modal">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                        <span class="text">Add</span>
+                                    </button>
+                                    </div>
+
+                                    <div class="my-2" style="float:right;">
+
+                                    &nbsp;
+                                    <button href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#import_school_Modal">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                        <span class="text">Import school</span>
+                                    </button>
+                                    </div>
+
+
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <form method="post"  action="/data_entry/faculty/update" >
+
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>S no</th>
+                                            <th>School Name</th>
+											<th>School State</th>
+                                            <th>School District</th>
+											<th>School pincode</th>
+											<th>School board</th>
+											<th>School contact</th>
+											<th>School status</th>
+											<th class="action">Action</th>
+
+
+
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                         {% for row in school %}
+                                        <tr>
+                                            <td>{{loop.index}}</td>
+                                            <td><a style="text-decoration: none;" href="/data_entry/student?school_id={{row.school_id}}">{{row.school_name}}</a></td>
+											<td>{{row.school_state}}</td>
+                                            <td>{{row.school_district}}</td>
+                                            <td>{{row.school_pincode}}</td>
+                                            <td>{{row.school_board}}</td>
+                                            <td>{{row.school_contact}}</td>
+                                            {% if row.school_status == "approved" %}
+                                            <td><span class="badge badge-success">Approved</span></td>
+                                            {% elif row.school_status == "decline" %}
+                                            <td><span class="badge badge-danger">Declined</span></td>
+                                            {% elif row.school_status == "notapproved" %}
+                                            <td><span class="badge badge-warning">Not Approved</span></td>{% endif %}
+
+											<td class="action">
+
+                                                {% if row.school_status == "approved" %}
+                                                <a type="button" name="view" value="view" id="{{row.school_id}}" class="btn btn-success btn-xs view_data">view</a>
+
+                                                <a type="button" data-toggle="modal" name="import" data-target="#import_data_Modal" id="{{row.school_id}}" class="btn btn-primary btn-xs import"><i class="fas fa-upload"></i></a>
+
+                                                {% elif row.school_status == "notapproved" %}
+
+
+                                                <a type="button" name="view" value="view" id="{{row.school_id}}" class="btn btn-warning btn-xs view_data"><i class="fas fa-thumbs-up"></i></a>
+                                                <a type="button" name="view" value="view" id="{{row.school_id}}" class="btn btn-danger btn-xs view_data"><i class="fas fa-thumbs-down"></i></a>
+                                                {% endif %}
+											</td>
+
+
+
+
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+
+
+
+		<!-- Add Modal-->
+<div id="add_data_Modal" class="modal fade">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-header">
+    <h4 class="modal-title">New School Details</h4>
+    <button type="button" class="close" data-dismiss="modal">×</button>
+
+   </div>
+   <div class="modal-body">
+    <form method="post" id="insert_form">
+	 <label>Enter School Name</label>
+     <input type="text" name="school_name" id="name" class="form-control" />
+	 <br />
+
+     <label>Enter School State</label>
+     <input type="text" name="school_state" id="state" class="form-control" />
+     <br />
+
+	 <label>Enter School District</label>
+      <input type="text" name="school_district" id="district" class="form-control"/>
+     <br />
+
+     <label>Enter School Pincode</label>
+     <input type="numbers" name="school_pincode" id="pincode" class="form-control"/>
+    <br />
+
+    <label>Enter School board</label>
+        <input type="text" name="school_board" id="board" class="form-control"/>
+
+     <br />
+
+     <label>Enter School contact</label>
+      <input type="number" name="school_contact" id="contact" class="form-control"/>
+     <br />
+
+   </div>
+
+   <div class="modal-footer">
+   <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />
+    <button type="button" class="btn btn-default" onclick="fieldclear('insert_form')" data-dismiss="modal">Close</button>
+	 </form>
+   </div>
+  </div>
+ </div>
+</div>
+
+
+		<!-- import school_student modal-->
+        <div id="import_data_Modal" class="modal fade">
+            <div class="modal-dialog">
+             <div class="modal-content">
+              <div class="modal-header">
+               <h4 class="modal-title">Import School Student Details</h4>
+               <button type="button" class="close"  data-dismiss="modal">×</button>
+
+              </div>
+              <div class="modal-body">
+               <form method="post" action="{{url_for('data_entry_school_details_import_student')}}" enctype = 'multipart/form-data'>
+
+
+
+
+
+                   <input type="text" name="import_school_id" id="import_school_id" hidden /><br>
+                   <label>Required columns: student_name,	student_contact	student_email,	student_grade,	student_whatsapp</label>
+                   <span style="color:red">Note: Order and name should be same</span>
+                   <br><br>
+                <label>Import file:</label>
+                <input type="file"  name="student_import" id="student_import" class="" accept=".csv"  required/>
+
+                <br />
+
+              <div class="modal-footer">
+              <input type="submit" name="insert_import" id="insert_import" value="Insert" class="btn btn-success" />
+               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+               </form>
+              </div>
+             </div>
+            </div>
+        </div>
+
+<!-- import school modal-->
+        <div id="import_school_Modal" class="modal fade">
+            <div class="modal-dialog">
+             <div class="modal-content">
+              <div class="modal-header">
+               <h4 class="modal-title">Import School Student Details</h4>
+               <button type="button" class="close"  data-dismiss="modal">×</button>
+
+              </div>
+              <div class="modal-body">
+               <form method="post" action="{{url_for('data_entry_school_details_import_school')}}" enctype = 'multipart/form-data'>
+
+
+                   <label>Required columns: school_name,school_state,school_state,school_pincode,school_board,school_contact</label>
+                   <span style="color:red">Note: Order and name should be same</span>
+                   <br><br>
+                <label>Import file:</label>
+                <input type="file"  name="school_import" id="school_import" class="" accept=".csv"  required/>
+
+                <br />
+
+              <div class="modal-footer">
+              <input type="submit" name="insert_import" id="inserts_import" value="Insert" class="btn btn-success" />
+               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+               </form>
+              </div>
+             </div>
+            </div>
+        </div>
+
+
+
+    <!--Update table modal-->
+
+	<div id="dataModal" class="modal fade">
+        <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-header">
+   <h4 class="modal-title">School Details</h4>
+    <button type="button" class="close" data-dismiss="modal">×</button>
+
+   </div>
+   <div class="modal-body">
+      <div class="table-responsive">
+	  <form method="post" id="update_form" >
+        <table class="table table-bordered">
+            <input type="hidden" class="form-control" name="school_id" id="school_id">
+
+        <tr>
+            <td width="30%"><label>School Name</label>
+            <td width="70%"><input type="text" name="school_name" class="form-control" id="school_name"></td>
+        </tr>
+
+        <tr>
+            <td width="30%"><label>School State</label>
+            <td width="70%"><input type="text" name="school_state" class="form-control" id="school_state"></td>
+        </tr>
+
+        <tr>
+            <td width="30%"><label>School District</label>
+            <td width="70%"><input type="text" name="school_district" class="form-control" id="school_district"></td>
+        </tr>
+        <tr>
+            <td width="30%"><label>School Pincode</label>
+            <td width="70%"><input type="text" name="school_pincode" class="form-control" id="school_pincode"></td>
+        </tr>
+
+        <tr>
+            <td width="30%"><label>School Board</label>
+            <td width="70%"><input type="text" name="school_board" class="form-control" id="school_board"/></td>
+        </tr>
+        <tr>
+            <td width="30%"><label>School Contact</label>
+            <td width="70%"><input type="number" name="school_contact" class="form-control" id="school_contact"/></td>
+        </tr>
+        <tr>
+            <td width="30%"><label>School Approval Status</label>
+            <td width="70%"><span id="schoolyes" style="display: block;" class="badge badge-success">Course is approved</span>
+
+                <select name="school_status"   style="visibility: visible;"  id="statuss" class="form-control">
+                <option value="notapproved"> ⭕ Not Approved</option>
+                <option value="approved">✅ Approve</option>
+                <option value="decline">❌ Decline</option>
+
+            </select></td>
+            </tr>
+
+    </table>
+	 <div class="modal-footer">
+    <input type="submit" name="update" id="update" value="Update" class="btn btn-success" />
+    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+	 </form>
+   </div>
+
+	</div>
+   </div>
+   <script src="https://gitcdn.xyz/repo/FuriosoJack/TableHTMLExport/v1.0.0/src/tableHTMLExport.js"></script>
+
+   <script>
+    $(document).ready(function () {
+        $('#insert_form').on("submit", function (event) {
+            event.preventDefault();
+
+            $.ajax({
+                url: "/data_entry/school_details",
+                method: "POST",
+                data: $('#insert_form').serialize(),
+                beforeSend: function () {
+                    $('#insert').val("Inserting");
+                },
+                success: function (data) {
+                    $('#add_data_Modal').modal('hide');
+                    if (data == 'success') {
+                        swal("Data is submitted successfully!",
+                            "New School detail is Created", "success");
+
+                        var delayInMilliseconds = 6500; //1 second
+
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, delayInMilliseconds);
+
+                    }
+                    if (data == 'error') {
+                        console.log('error')
+                        swal("Data is not Submitted!",
+                            "Error in submitting Data",
+                            "error");
+                            window.location.reload();
+                    }
+                }
+            });
+
+        });
+
+
+
+        $('#update_form').on("submit", function (event) {
+            event.preventDefault();
+
+                $.ajax({
+                    url: "/data_entry/school_details/change",
+                    method: "POST",
+                    data: $('#update_form').serialize(),
+                    beforeSend: function () {
+                        $('#update').val("Updating");
+                    },
+                    success: function (data) {
+                        $('#add_data_Modal').modal('hide');
+                        if (data == 'success') {
+                            console.log('success')
+                            location.reload();
+                        }
+                    }
+                });
+
+        });
+
+
+        $(document).on('click', '.view_data', function () {
+            var school_id = $(this).attr("id");
+            $.ajax({
+                url: "/data_entry/school_details/select",
+                method: "POST",
+                data: {
+                    school_id: school_id
+                },
+                success: function (data) {
+                    $('#dataModal').modal('show');
+                    var data_rs = JSON.parse(data);
+                    $('#school_id').val(data_rs[0]['school_id']);
+                    $('#school_name').val(data_rs[0]['school_name']);
+                    $('#school_state').val(data_rs[0]['school_state']);
+                    $('#school_district').val(data_rs[0]['school_district']);
+                    $('#school_pincode').val(data_rs[0]['school_pincode']);
+                    $('#school_board').val(data_rs[0]['school_board']);
+                    $('#school_contact').val(data_rs[0]['school_contact']);
+                    console.log(data_rs[0]['school_name'])
+
+                    if(data_rs[0]['school_status']=="approved")
+                    {
+                        document.getElementById("statuss").style.visibility = "hidden";
+                        document.getElementById("schoolyes").style.display = "block";
+                        document.getElementById("statuss").value = "approved"
+                    }
+                    else{
+                        document.getElementById("schoolyes").style.display = "none";
+
+                        document.getElementById("statuss").style.visibility = "visible";
+
+                        document.getElementById("statuss").value = data_rs[0]['school_status'];
+
+                    }
+
+                }
+            });
+        });
+
+
+        $(document).on('click', '.import', function () {
+            var school_id = $(this).attr("id");
+            $.ajax({
+                url: "/data_entry/school_details/import",
+                method: "POST",
+                data: {
+                    school_id: school_id
+                },
+                success: function (data) {
+                    $('#import_data_Modal').modal('show');
+                    var data_rs = JSON.parse(data);
+                    $('#import_school_id').val(data_rs[0]['school_id']);
+                    $('#import_school_name').val(data_rs[0]['school_name']);
+
+                    console.log(data_rs[0]['school_name'])
+
+
+
+                }
+            });
+        });
+
+
+
+
+
+
+    });
+
+
+
+
+</script>
+
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  {% for category, message in messages %}
+
+    <Script>
+         swal("{{ message }}","Import Function","{{ category }}");
+
+      
+    </Script>
+
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+
+
+
+
+
+     <script>
+
+         $(document).ready(function(){
+   $(".export-btn").click(function(){
+     $("#dataTable").tableHTMLExport({
+
+      type:'csv',
+      filename:'School_Details.csv',
+      ignoreColumns:'.action',
+    });
+  });
+});
+     </script>
+
+
+</body>
+
+</html>
+
+

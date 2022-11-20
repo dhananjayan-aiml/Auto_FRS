@@ -1,0 +1,567 @@
+
+<html lang="en" class=" sizes customelements history pointerevents postmessage webgl websockets cssanimations csscolumns csscolumns-width csscolumns-span csscolumns-fill csscolumns-gap csscolumns-rule csscolumns-rulecolor csscolumns-rulestyle csscolumns-rulewidth csscolumns-breakbefore csscolumns-breakafter csscolumns-breakinside flexbox picture srcset webworkers"><head>
+<style>
+    img{
+  max-width:180px;
+}
+input[type=file]{
+padding:10px;
+background:#2d2d2d;}
+
+</style>
+			<title>Login | Learning Management System Online</title>
+
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link name="favicon" type="image/x-icon" href="{{url_for('static',filename='img/favicon.png')}}" rel="shortcut icon">
+	<link rel="favicon" href="{{url_for('static',filename='assets/frontend/default/img/icons/favicon.ico')}}">
+<link rel="apple-touch-icon" href="{{url_for('static',filename='assets/frontend/default/img/icons/icon.png')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='assets/frontend/default/css/jquery.webui-popover.min.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='assets/frontend/default/css/select2.min.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='assets/frontend/default/css/slick.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='assets/frontend/default/css/slick-theme.css')}}">
+<!-- font awesome 5 -->
+<link rel="stylesheet" href="{{url_for('static',filename='assets/frontend/default/css/fontawesome-all.min.css')}}">
+
+<link rel="stylesheet" href="{{url_for('static',filename='assets/frontend/default/css/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='assets/frontend/default/css/bootstrap-tagsinput.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='assets/frontend/default/css/main.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='assets/frontend/default/css/responsive.css')}}">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700" rel="stylesheet">
+<link rel="stylesheet" href="{{url_for('static',filename='assets/global/toastr/toastr.css')}}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nestable2/1.6.0/jquery.nestable.min.css">
+
+     <script src="{{url_for('static',filename='assets/backend/js/jquery-3.3.1.min.js')}}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+</head>
+<body class="gray-bg">
+<section class="menu-area">
+  <div class="container-xl">
+    <div class="row">
+      <div class="col">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" >
+
+          <ul class="mobile-header-buttons">
+            <li><a class="mobile-nav-trigger" href="#mobile-primary-nav">Menu<span></span></a></li>
+            <li><a class="mobile-search-trigger" href="#mobile-search">Search<span></span></a></li>
+          </ul>
+
+          <a  class="navbar-brand" href="/"><img src="{{url_for('static',filename='img/banner.png')}}" alt="" height="35" ></a>
+
+
+          <div class="main-nav-wrap">
+  <div class="mobile-overlay"></div>
+
+  <ul class="mobile-main-nav">
+    <div class="mobile-menu-helper-top"></div>
+
+    <li class="has-children">
+      <a href="">
+        <i class="fas fa-th d-inline"></i>
+        <span>Courses</span>
+        <span class="has-sub-category"><i class="fas fa-angle-right"></i></span>
+      </a>
+
+</li>
+
+<div class="mobile-menu-helper-bottom"></div>
+</ul>
+</div>
+<form class="inline-form" action="" method="get" style="width: 100%;">
+            <div style="padding-top: 15px" class="input-group search-box mobile-search">
+              <input type="text" name = 'query' class="form-control" placeholder="Search For Courses">
+              <div class="input-group-append">
+                <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+              </div>
+            </div>
+          </form>
+
+
+
+
+
+          <span class="signin-box-move-desktop-helper"></span>
+
+          <div class="sign-in-box btn-group" >
+
+            <a href="{{url_for('student_login')}}" class="btn btn-sign-in" >Log In</a>
+
+            <a href="{{url_for('student_register')}}" class="btn btn-sign-up">Sign Up</a>
+
+          </div> <!--  sign-in-box end -->
+
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <script>
+        {% if msg == 'success' %}
+    
+            swal("Registered Successfully !!", "Check email/message for verification we will get you soon ! !", "success");
+         {% endif %}
+        </script>
+        
+        <script>
+        {% if msg == 'error' %}
+    
+            swal("Registration Failed !!", "Entered Details Already exists ! !", "error");
+         {% endif %}
+        </script>
+
+<section class="category-header-area">
+    <div class="container-lg">
+        <div class="row">
+            <div class="col">
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><i class="fas fa-home"></i></li>
+                        <li class="breadcrumb-item">
+
+                                Sign Up
+                        </li>
+                    </ol>
+                </nav>
+                <h1 class="category-name">
+                    User Registeration                </h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="category-course-list-area">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+              <div class="user-dashboard-box mt-3">
+                   <div class="user-dashboard-content w-100 register-form">
+                      <div class="content-title-box">
+                          <div class="title">Registration Form</div>
+                          <div class="subtitle">Sign Up And Start Learning.</div>
+                      </div>
+                      <form action="{{url_for('student_register')}}" method="post" enctype="multipart/form-data">
+                          <div class="content-box">
+                              <div class="basic-group">
+                                  <div class="form-group">
+                                      <label for="username"><span class="input-field-icon"><i class="fas fa-user"></i></span> First Name:</label>
+                                      <input type="text" class="form-control" name="username" id="username"  value="" onkeyup="allLetter()" placeholder="Enter your name" oninvalid="this.setCustomValidity('Enter Your Name')" oninput="this.setCustomValidity('')" required>
+                                      <span id='message'></span>
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label for="email"><span class="input-field-icon"><i class="fas fa-envelope"></i></span> Email:</label>
+                                      <input type="email" class="form-control" name="email" id="email"  value="" onkeyup="allmail()" placeholder="Enter your email" oninvalid="this.setCustomValidity('Enter Your Mail id')" oninput="this.setCustomValidity('')" required>
+                                      <span id='message1'></span>
+
+
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label for="mobile"><span class="input-field-icon"><i class="fas fa-mobile"></i></span> Mobile no:</label>
+                                      <input type="numbers" class="form-control" name="mobile" id="mobile"  value="" onkeyup="allmobile()" placeholder="Enter your mobile no"  oninvalid="this.setCustomValidity('Enter Your Mobile number')" oninput="this.setCustomValidity('')" required>
+                                      <span id='message2'></span>
+                                  </div>
+
+                                   <div class="form-group">
+                                      <label for="grade"><span class="input-field-icon"><i class="fas fa-user-graduate"></i></span> Grade:</label>
+                                      <select style="height:46px;" class="form-control" name="grade" id="grade"  oninvalid="this.setCustomValidity('Select Your Grade')"
+                                                                      oninput="this.setCustomValidity('')" required>
+                                          <option value="" disabled selected><h6>Select your Grade</h6></option>
+                                          <option value="1">I</option>
+                                          <option value="2">II</option>
+                                          <option value="3">III</option>
+                                          <option value="4">IV</option>
+                                          <option value="5">V</option>
+                                          <option value="6">VI</option>
+                                          <option value="7">VII</option>
+                                          <option value="8">VIII</option>
+                                          <option value="9">IX</option>
+                                          <option value="10">X</option>
+                                          <option value="11">XI</option>
+                                          <option value="12">XII</option>
+                                    </select>
+                                  </div>
+
+                                   <div class="form-group">
+                                      <label for="whatsapp"><span class="input-field-icon"><i class="fab fa-whatsapp-square"></i></span> Whatsapp no:</label>
+                                      <input type="numbers" class="form-control" name="whatsapp" id="whatsapp"  value="" onkeyup="allwhats()" placeholder="Enter your whatsapp no" oninvalid="this.setCustomValidity('Enter Your whatsapp number')" oninput="this.setCustomValidity('')" required>
+                                      <span id='message3'></span>
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label for="pin"><span class="input-field-icon"><i class="fas fa-address-card"></i></span> Pin: <h6>(Enter pincode to select school. State,district and Board automatically updated with pin code)</h6></label>
+                                      <input type="number" class="form-control" name="pin" id="pin"  value="" onkeyup="allpin()" placeholder="Enter your pincode" required oninvalid="this.setCustomValidity('Enter Your pincode')" oninput="this.setCustomValidity('')">
+                                      <span id='message4'></span>
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label for="school_name"><span class="input-field-icon"><i class="fas fa-school"></i></span> School Name   ( <span id="message8"></span> )</label>
+                                       <select style="height:46px;" id="school_name" name="school_name"  class="form-control" required>
+                                     <option value="" disabled selected>Select your School </option>
+
+                                </select>
+								<a href="{{url_for('student_school_register')}}" style="float:right"> <u style="color:blue">Click here to Register your school if not in form </u></a>
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label for="district1"><span class="input-field-icon"><i class="far fa-building"></i></span> District</label>
+                                      <input type="text" class="form-control" name="district1" id="district1"  value=" " disabled required>
+
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label for="state1"><span class="input-field-icon"><i class="fas fa-search-location"></i></span> State</label>
+                                      <input type="text" class="form-control" name="state1" id="state1"  value=" "  disabled required>
+
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label for="board"><span class="input-field-icon"><i class="fas fa-university"></i></span> Board</label>
+                                      <input type="text" class="form-control" name="board" id="board"  value=" " disabled required>
+
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="board"><span class="input-field-icon"><i class="fas fa-user"></i></span> Id Photo</label>
+                                      <br>
+                                    <input type='file' accept="image/*" name ="file" style="background-color:white;" onchange="readURL(this);" required />
+                                        <img  id="blah" src="" alt="your image" />
+                                  </div>
+                                  <br>
+
+
+
+                                 <div class="form-group">
+                            <label for="password"><span class="input-field-icon"><i class="fas fa-unlock-alt"></i></span> Password </label> <span style="float:right;" toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                            <input type="password" value="" name="password" id="password" onkeyup="allpwd()" class="form-control form-control-lg" required>
+
+							<span id='message6'></span>	<br>
+							<span id='message5'></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirm_password"><span class="input-field-icon"><i class="fas fa-unlock-alt"></i></span> Re-type Password </label>
+                            <input type="password" id="confirm_password" onkeyup='check();' class="form-control form-control-lg" required >
+
+                        </div>
+
+
+
+                              </div>
+                          </div>
+                          <div class="content-update-box">
+                              <button type="submit" class="btn" id="submit-btn">Sign Up</button>
+                          </div>
+                          <div class="account-have text-center">
+                              Already Have An Account? <a href="{{url_for('student_login')}}">Login</a>
+                          </div>
+                      </form>
+                  </div>
+
+
+
+              </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+        <footer class="footer-area">
+            <div class="container-xl">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="copyright-text">
+                            <a href=""><img src="{{url_for('static',filename='img/banner.png')}}" alt="" class="d-inline-block" width="510"></a>
+
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+
+
+
+
+
+   
+
+<script>
+function allLetter()
+      {
+	  document.getElementById("username").style.textTransform = "uppercase";
+	  var inputtxt = document.getElementById('username');
+	  console.log(inputtxt);
+      var letters = /^[A-Za-z ]+ [A-Za-z]{1,4}$/;
+      if(inputtxt.value.match(letters))
+      {
+
+	   document.getElementById('message').innerHTML = '';
+       document.getElementById('submit-btn').disabled = false;
+      }
+      else
+      {
+	  document.getElementById('message').style.color = 'red';
+
+	   document.getElementById('message').innerHTML = 'Enter your Name with Initial at last Avoid numbers and special characters';
+      document.getElementById('submit-btn').disabled = true;
+      }
+      }
+</script>
+<script>
+
+function allmail()
+      {
+	  var inputmail = document.getElementById('email');
+
+      var email = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+      if(inputmail.value.match(email))
+      {
+
+	   document.getElementById('message1').innerHTML = '';
+	    document.getElementById('submit-btn').disabled = false;
+
+
+
+      }
+      else
+      {
+	  document.getElementById('message1').style.color = 'red';
+
+	   document.getElementById('message1').innerHTML = 'Enter Valid e-mail';
+      document.getElementById('submit-btn').disabled = true;
+      }
+      }
+</script>
+<script>
+
+function allmobile()
+      {
+	  var inputmobile = document.getElementById('mobile');
+
+      var mobile = /^[6789][0-9]{9}$/;
+      if(inputmobile.value.match(mobile))
+      {
+
+	   document.getElementById('message2').innerHTML = '';
+	    document.getElementById('submit-btn').disabled = false;
+
+      }
+      else
+      {
+	  document.getElementById('message2').style.color = 'red';
+
+	   document.getElementById('message2').innerHTML = 'Enter Valid Mobile no';
+      document.getElementById('submit-btn').disabled = true;
+      }
+      }
+</script>
+
+<script>
+function allwhats()
+      {
+	  var inputwhats = document.getElementById('whatsapp');
+
+      var whatsapp = /^[6789][0-9]{9}$/;
+      if(inputwhats.value.match(whatsapp))
+      {
+
+	   document.getElementById('message3').innerHTML = '';
+	    document.getElementById('submit-btn').disabled = false;
+
+      }
+      else
+      {
+	  document.getElementById('message3').style.color = 'red';
+
+	   document.getElementById('message3').innerHTML = 'Enter Valid Mobile no';
+      document.getElementById('submit-btn').disabled = true;
+      }
+      }
+</script>
+<script>
+function allpin()
+      {
+	  var inputpin = document.getElementById('pin');
+
+      var pin = /^[0-9]{6}$/;
+      if(inputpin.value.match(pin))
+      {
+          var select = document.getElementById("school_name");
+          var school=[];
+
+	      document.getElementById('message4').innerHTML = '';
+	      document.getElementById('submit-btn').disabled = false;
+
+	                {% for i in school_details %}
+	                     var a ={{i.school_pincode}};
+
+	                           if (inputpin.value == a)
+	                               {
+
+                                         console.log('hi');
+                                        school.push("{{i.school_name}}")
+                                        document.getElementById('state1').value =" {{i.school_state}}";
+                                        document.getElementById('district1').value = "{{i.school_district}}";
+                                        document.getElementById('board').value = "{{i.school_board}}";
+                                        document.getElementById('message8').style.color = 'green';
+                                        document.getElementById('message8').innerHTML = school.length +" " +" Schools found";
+
+	                                 }
+	                            else{
+	                                    var oplist=document.getElementById("school_name");
+                                        for(var i = oplist.options.length-1;i>0;i--)
+                                        {
+                                        oplist.removeChild(oplist.options[i]);
+                                        }
+
+<!--	                                    document.getElementById('message8').style.color = 'red';-->
+<!--                                        document.getElementById('message8').innerHTML = 'No schools found';-->
+
+	                                 }
+
+	                   {% endfor %}
+
+
+                        for (var i = 0; i < school.length; i++) {
+                            var optn = school[i];
+                            var el = document.createElement("option");
+                            el.textContent = optn;
+                            el.value = optn;
+                            select.appendChild(el);
+                        }
+
+
+
+      }
+      else
+      {
+	  document.getElementById('message4').style.color = 'red';
+	  document.getElementById('state1').value ="";
+      document.getElementById('district1').value = "";
+      document.getElementById('board').value = "";
+      var oplist=document.getElementById("school_name");
+      for(var i = oplist.options.length-1;i>0;i--)
+      {
+      oplist.removeChild(oplist.options[i]);
+       }
+       document.getElementById('message8').style.color = 'red';
+       document.getElementById('message8').innerHTML = 'No schools found';
+
+	   document.getElementById('message4').innerHTML = 'Enter Valid Pin code';
+      document.getElementById('submit-btn').disabled = true;
+      }
+      }
+</script>
+<script>
+function allpwd()
+      {
+	  var inputpwd = document.getElementById('password');
+
+      var pwd = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,12}$/;
+      if(inputpwd.value.match(pwd))
+      {
+
+	   document.getElementById('message6').innerHTML = '';
+	    document.getElementById('submit-btn').disabled = false;
+
+      }
+      else
+      {
+	  document.getElementById('message6').style.color = 'red';
+
+	   document.getElementById('message6').innerHTML = 'Password must contain minimum 8 characters with 1 lowercase,uppercase and number';
+      document.getElementById('submit-btn').disabled = true;
+      }
+      }
+</script>
+
+
+  <script>
+    var check = function () {
+      if (document.getElementById('password').value ==
+        document.getElementById('confirm_password').value    && document.getElementById('password').value!=null) {
+        document.getElementById('message5').style.color = 'green';
+        document.getElementById('message5').innerHTML = 'Password matching';
+      } else {
+        document.getElementById('message5').style.color = 'red';
+        document.getElementById('message5').innerHTML = 'Password not matching';
+      }
+      if (document.getElementById('password').value ==
+        document.getElementById('confirm_password').value) {
+        document.getElementById('submit-btn').disabled = false;
+      } else {
+        document.getElementById('submit-btn').disabled = true;
+      }
+    }
+
+
+  </script>
+<script>
+	$(".toggle-password").click(function() {
+
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $($(this).attr("toggle"));
+  if (input.attr("type") == "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+});
+</script>
+
+<script>
+         function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>
+
+
+
+
+         <script src="{{url_for('static',filename='assets/backend/js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/frontend/default/js/vendor/modernizr-3.5.0.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/frontend/default/js/vendor/jquery-3.2.1.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/frontend/default/js/popper.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/frontend/default/js/bootstrap.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/frontend/default/js/slick.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/frontend/default/js/select2.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/frontend/default/js/tinymce.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/frontend/default/js/multi-step-modal.js')}}"></script>
+<script src="{{url_for('static',filename='assets/frontend/default/js/jquery.webui-popover.min.js')}}"></script>
+<script src="https://content.jwplatform.com/libraries/O7BMTay5.js"></script>
+<script src="{{url_for('static',filename='assets/frontend/default/js/main.js')}}"></script>
+<script src="{{url_for('static',filename='assets/global/toastr/toastr.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nestable2/1.6.0/jquery.nestable.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>
+<script src="{{url_for('static',filename='assets/frontend/default/js/bootstrap-tagsinput.min.js')}}assets/frontend/default/js/bootstrap-tagsinput.min.js"></script>
+<script src="{{url_for('static',filename='assets/frontend/default/js/custom.js')}}"></script>
+
+<!-- SHOW TOASTR NOTIFIVATION -->
+
+
+
+</body></html>
