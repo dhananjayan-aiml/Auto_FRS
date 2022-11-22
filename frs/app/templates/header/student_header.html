@@ -1,0 +1,300 @@
+<html><head>
+    <title>Courses | BIT Portal</title>
+    <!-- all the meta tags -->
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta content="" name="description">
+<meta content="" name="author">
+    <!-- all the css files -->
+
+<!-- third party css -->
+    <link name="favicon" type="image/x-icon" href="{{url_for('static',filename='img/favicon.png')}}" rel="shortcut icon">
+<link href="{{url_for('static',filename='assets/backend/css/vendor/jquery-jvectormap-1.2.2.css')}}" rel="stylesheet" type="text/css">
+<link href="{{url_for('static',filename='assets/backend/css/vendor/dataTables.bootstrap4.css')}}" rel="stylesheet" type="text/css">
+<link href="{{url_for('static',filename='assets/backend/css/vendor/responsive.bootstrap4.css')}}" rel="stylesheet" type="text/css">
+<link href="{{url_for('static',filename='assets/backend/css/vendor/buttons.bootstrap4.css')}}" rel="stylesheet" type="text/css">
+<link href="{{url_for('static',filename='assets/backend/css/vendor/select.bootstrap4.css')}}" rel="stylesheet" type="text/css">
+<link href="{{url_for('static',filename='assets/backend/css/vendor/summernote-bs4.css')}}" rel="stylesheet" type="text/css">
+<link href="{{url_for('static',filename='assets/backend/css/vendor/fullcalendar.min.css')}}" rel="stylesheet" type="text/css">
+<link href="{{url_for('static',filename='assets/backend/css/vendor/dropzone.css')}}" rel="stylesheet" type="text/css">
+<!-- third party css end -->
+<!-- App css -->
+    <link href="{{url_for('static',filename='assets/backend/css/app.css')}}" rel="stylesheet" type="text/css">
+<link href="{{url_for('static',filename='assets/backend/css/app.min.css')}}" rel="stylesheet" type="text/css">
+<link href="{{url_for('static',filename='assets/backend/css/icons.min.css')}}" rel="stylesheet" type="text/css">
+
+<link href="{{url_for('static',filename='assets/backend/css/main.css')}}" rel="stylesheet" type="text/css">
+
+<!-- font awesome 5 -->
+<link href="{{url_for('static',filename='assets/backend/css/fontawesome-all.min.css')}}" rel="stylesheet" type="text/css">
+<link href="{{url_for('static',filename='assets/backend/css/font-awesome-icon-picker/fontawesome-iconpicker.min.css')}}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css">
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')}}"></script> -->
+<script src="{{url_for('static',filename='assets/backend/js/jquery-3.3.1.min.js')}}" charset="utf-8"></script>
+<script src="{{url_for('static',filename='assets/backend/js/onDomChange.js')}}"></script>
+
+
+
+	<link rel="favicon" href="{{url_for('static',filename='assets/frontend/default/img/icons/favicon.ico')}}">
+<link rel="apple-touch-icon" href="{{url_for('static',filename='assets/frontend/default/img/icons/icon.png')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='assets/frontend/default/css/jquery.webui-popover.min.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='assets/frontend/default/css/select2.min.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='assets/frontend/default/css/slick.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='assets/frontend/default/css/slick-theme.css')}}">
+<!-- font awesome 5 -->
+<link rel="stylesheet" href="{{url_for('static',filename='assets/frontend/default/css/fontawesome-all.min.css')}}">
+
+<link rel="stylesheet" href="{{url_for('static',filename='assets/frontend/default/css/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='assets/frontend/default/css/bootstrap-tagsinput.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='assets/frontend/default/css/main.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='assets/frontend/default/css/responsive.css')}}">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700" rel="stylesheet">
+<link rel="stylesheet" href="{{url_for('static',filename='assets/global/toastr/toastr.css')}}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nestable2/1.6.0/jquery.nestable.min.css')}}" />
+<script src="{{url_for('static',filename='assets/backend/js/jquery-3.3.1.min.js')}}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+<style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
+<body data-layout="detached" class="enlarged">
+    <!-- HEADER -->
+    <!-- Topbar Start -->
+<div class="navbar-custom topnav-navbar topnav-navbar-dark">
+    <div class="container-fluid">
+
+        <!-- LOGO -->
+        <a href="{{url_for('home')}}" class="topnav-logo" style="min-width: unset;">
+            <span class="topnav-logo-lg">
+                <img src="{{url_for('static',filename='img/bit.png')}}" alt="" width="100" height="70">
+            </span>
+            <span class="topnav-logo-sm">
+                <img src="{{url_for('static',filename='img/bit.png')}}" alt="" width="60" height="70">
+            </span>
+        </a>
+
+        <ul class="list-unstyled topbar-right-menu float-right mb-0">
+
+
+                <p class="nav-link  nav-user  mr-0" id="topbar-userdrop"  aria-haspopup="true" aria-expanded="false">
+                <span class="account-user-avatar">
+
+                    {% if student.student_profile!=None %}
+            <img src="{{url_for('static',filename=student.student_profile)}}" alt="user-image" height="70" class="rounded-circle ">
+
+            {% else %}
+			<img src="{{url_for('static',filename='img/profile_images/default_profile.png')}}" alt="user-image" height="70" class="rounded-circle ">
+            {% endif %}
+
+                </span>
+                <span style="color: #fff;">
+                                        <span class="account-user-name" style="text-transform: uppercase;">{{student.student_name}}</span>
+                    <span class="account-position">{{student.student_email}}</span>
+                </span>
+            </p>
+
+
+
+</ul>
+<a class="button-menu-mobile disable-btn">
+    <div class="lines">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</a>
+<div class="app-search">
+    <h4 style="color: #fff; float: left;"> Bannari Amman Institue Of Technology </h4>
+
+</div>
+</div>
+</div>
+<!-- end Topbar -->
+    <div class="container-fluid active">
+        <div class="wrapper in">
+            <!-- BEGIN CONTENT -->
+            <!-- SIDEBAR -->
+            <!-- ========== Left Sidebar Start ========== -->
+<div class="left-side-menu left-side-menu-detached active">
+	<div class="leftbar-user active">
+		<a href="javascript: void(0);">
+            {% if student.student_profile!=None %}
+            <img src="{{url_for('static',filename=student.student_profile)}}" alt="user-image" height="70" class="rounded-circle shadow-sm">
+
+            {% else %}
+			<img src="{{url_for('static',filename='img/profile_images/default_profile.png')}}" alt="user-image" height="70" class="rounded-circle shadow-sm">
+            {% endif %}
+            <br><br>
+
+            <form action = "{{url_for('change_photo')}}" method = "post" enctype="multipart/form-data">
+
+                          <input type="file"  id="file" accept="image/*" name="change_profile"  onchange="javascript:this.form.submit();" hidden/>
+                <label for ="file" type="button" class="btn btn-primary"  style="height:40px;background-color:SlateBlue;border-color:SlateBlue;" ><h6>Change Photo</h6></label></form>
+						<span class="leftbar-user-name" style="text-transform: uppercase;">{{student.student_name}}</span>
+		</a>
+	</div>
+
+	<!--- Sidemenu -->
+		<ul class="metismenu side-nav side-nav-light in">
+
+			<li class="side-nav-title side-nav-item">Navigation</li>
+
+			<li class="side-nav-item ">
+				<a href="{{url_for('home')}}" class="side-nav-link">
+					<i class="dripicons-view-apps"></i>
+					<span>Dashboard</span>
+				</a>
+			</li>
+
+<!--			<li class="side-nav-item ">-->
+<!--				<a href="javascript: void(0);" class="side-nav-link ">-->
+<!--					<i class="dripicons-network-1"></i>-->
+<!--					<span> Categories </span>-->
+<!--					<span class="menu-arrow"></span>-->
+<!--				</a>-->
+<!--				<ul class="side-nav-second-level collapse" aria-expanded="false">-->
+<!--					<li class="">-->
+<!--						<a href="https://localhost/Online_Learning_Management_System/admin/categories">Categories</a>-->
+<!--					</li>-->
+
+<!--					<li class="">-->
+<!--						<a href="https://localhost/Online_Learning_Management_System/admin/category_form/add_category">Add New Category</a>-->
+<!--					</li>-->
+<!--				</ul>-->
+<!--			</li>-->
+
+<!--			<li class="side-nav-item active">-->
+<!--				<a href="https://localhost/Online_Learning_Management_System/admin/courses" class="side-nav-link ">-->
+<!--					<i class="dripicons-archive"></i>-->
+<!--					<span>My Courses</span>-->
+<!--				</a>-->
+<!--			</li>-->
+<!--			<li class="side-nav-item">-->
+<!--				<a href="https://localhost/Online_Learning_Management_System/admin/users" class="side-nav-link ">-->
+<!--					<i class="dripicons-user-group"></i>-->
+<!--					<span>Students</span>-->
+<!--				</a>-->
+<!--			</li>-->
+
+<!--			<li class="side-nav-item ">-->
+<!--				<a href="javascript: void(0);" class="side-nav-link ">-->
+<!--					<i class="dripicons-network-3"></i>-->
+<!--					<span> Enrolment </span>-->
+<!--					<span class="menu-arrow"></span>-->
+<!--				</a>-->
+<!--				<ul class="side-nav-second-level collapse" aria-expanded="false">-->
+<!--					<li class="">-->
+<!--						<a href="https://localhost/Online_Learning_Management_System/admin/enrol_history">Enrol History</a>-->
+<!--					</li>-->
+
+<!--					<li class="">-->
+<!--						<a href="https://localhost/Online_Learning_Management_System/admin/enrol_student">Enrol A Student</a>-->
+<!--					</li>-->
+<!--				</ul>-->
+<!--			</li>-->
+
+<!--			<li class="side-nav-item">-->
+<!--				<a href="javascript: void(0);" class="side-nav-link ">-->
+<!--					<i class="dripicons-box"></i>-->
+<!--					<span> Report </span>-->
+<!--					<span class="menu-arrow"></span>-->
+<!--				</a>-->
+<!--				<ul class="side-nav-second-level collapse" aria-expanded="false">-->
+<!--					<li class=""> <a href="https://localhost/Online_Learning_Management_System/admin/admin_revenue">Admin Revenue</a> </li>-->
+<!--												<li class="">-->
+<!--									<a href="https://localhost/Online_Learning_Management_System/admin/instructor_revenue">-->
+<!--											Instructor Revenue <span class="badge badge-danger-lighten badge-pill">0</span>-->
+<!--									</a>-->
+<!--							</li>-->
+<!--									</ul>-->
+<!--			</li>-->
+
+			<li class="side-nav-item">
+				<a href="{{url_for('student_profile')}}" class="side-nav-link ">
+					<i class="dripicons-message"></i>
+					<span>My profile</span>
+				</a>
+			</li>
+
+			<li class="side-nav-item">
+				<a href="{{url_for('student_logout')}}" class="side-nav-link">
+                <i class="mdi mdi-logout mr-1"></i>
+                <span>Logout</span>
+            </a>
+			</li>
+
+<!--			<li class="side-nav-item">-->
+<!--			<a href="javascript: void(0);" class="side-nav-link ">-->
+<!--				<i class="dripicons-toggles"></i>-->
+<!--				<span> Settings </span>-->
+<!--				<span class="menu-arrow"></span>-->
+<!--			</a>-->
+<!--			<ul class="side-nav-second-level collapse" aria-expanded="false">-->
+<!--				<li class="">-->
+<!--					<a href="https://localhost/Online_Learning_Management_System/admin/system_settings">System Settings</a>-->
+<!--				</li>-->
+<!--				<li class="">-->
+<!--					<a href="https://localhost/Online_Learning_Management_System/admin/frontend_settings">Website Settings</a>-->
+<!--				</li>-->
+<!--				<li class="">-->
+<!--					<a href="https://localhost/Online_Learning_Management_System/admin/payment_settings">Payment Settings</a>-->
+<!--				</li>-->
+<!--				<li class="">-->
+<!--					<a href="https://localhost/Online_Learning_Management_System/admin/instructor_settings">Instructor Settings</a>-->
+<!--				</li>-->
+<!--				<li class="">-->
+<!--					<a href="https://localhost/Online_Learning_Management_System/admin/manage_language">Language Settings</a>-->
+<!--				</li>-->
+<!--				<li class="">-->
+<!--					<a href="https://localhost/Online_Learning_Management_System/admin/smtp_settings">Smtp Settings</a>-->
+<!--				</li>-->
+<!--				<li class="">-->
+<!--					<a href="https://localhost/Online_Learning_Management_System/admin/about">About</a>-->
+<!--				</li>-->
+<!--				<li class="">-->
+<!--					<a href="https://localhost/Online_Learning_Management_System/admin/themes">Themes</a>-->
+<!--				</li>-->
+<!--				<li class="">-->
+<!--					<a href="https://localhost/Online_Learning_Management_System/admin/mobile_app">Mobile App</a>-->
+<!--				</li>-->
+<!--			</ul>-->
+<!--		</li>-->
+	    </ul>
+</div>
+               <!-- bundle -->
+<script src="{{url_for('static',filename='assets/backend/js/app.min.js')}}"></script>
+<!-- third party js -->
+<script src="{{url_for('static',filename='assets/backend/js/vendor/Chart.bundle.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/backend/js/vendor/jquery-jvectormap-1.2.2.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/backend/js/vendor/jquery-jvectormap-world-mill-en.js')}}"></script>
+<script src="{{url_for('static',filename='assets/backend/js/vendor/jquery.dataTables.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/backend/js/vendor/dataTables.bootstrap4.js')}}"></script>
+<script src="{{url_for('static',filename='assets/backend/js/vendor/dataTables.responsive.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/backend/js/vendor/responsive.bootstrap4.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/backend/js/vendor/dataTables.buttons.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/backend/js/vendor/buttons.bootstrap4.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/backend/js/vendor/buttons.html5.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/backend/js/vendor/buttons.flash.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/backend/js/vendor/buttons.print.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/backend/js/vendor/dataTables.keyTable.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/backend/js/vendor/dataTables.select.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/backend/js/vendor/summernote-bs4.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/backend/js/vendor/fullcalendar.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/backend/js/pages/demo.summernote.js')}}"></script>
+<script src="{{url_for('static',filename='assets/backend/js/vendor/dropzone.js')}}"></script>
+<script src="{{url_for('static',filename='assets/backend/js/pages/demo.dashboard.js')}}"></script>
+<script src="{{url_for('static',filename='assets/backend/js/pages/datatable-initializer.js')}}"></script>
+<script src="{{url_for('static',filename='assets/backend/js/font-awesome-icon-picker/fontawesome-iconpicker.min.js')}}" charset="utf-8"></script>
+<script src="{{url_for('static',filename='assets/backend/js/vendor/bootstrap-tagsinput.min.js')}}" charset="utf-8"></script>
+<script src="{{url_for('static',filename='assets/backend/js/bootstrap-tagsinput.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/backend/js/vendor/dropzone.min.js')}}" charset="utf-8"></script>
+<script src="{{url_for('static',filename='assets/backend/js/ui/component.fileupload.js')}}" charset="utf-8"></script>
+<script src="{{url_for('static',filename='assets/backend/js/pages/demo.form-wizard.js')}}"></script>
+<!-- dragula js-->
+<script src="{{url_for('static',filename='assets/backend/js/vendor/dragula.min.js')}}"></script>
+<!-- component js -->
+<script src="{{url_for('static',filename='assets/backend/js/ui/component.dragula.js')}}"></script>
+
+<script src="{{url_for('static',filename='assets/backend/js/custom.js')}}"></script>
