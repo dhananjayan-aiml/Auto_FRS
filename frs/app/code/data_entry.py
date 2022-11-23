@@ -46,6 +46,7 @@ def data_entry_subject():
             description = request.form['descr']                   
             try:
                 cursor.execute("INSERT INTO subject (subject_name, subject_description) VALUES (%s, %s)",[name, description])
+                cursor.execute("INSERT INTO subject (subject_name, subject_description) VALUES (%s, %s)",[name, description])
                 mysql.connection.commit()
                 return jsonify('success')
             except Exception as Ex:
@@ -124,7 +125,7 @@ def data_entry_course():
             # file.save(os.path.join(app.root_path, f'static/uploads/pdf/{subjectid}-{grade}.{extension}'))
             # student_id = "uploads/pdf/{0}-{1}.pdf".format(subjectid, grade)
             try:
-                cursor.execute("INSERT INTO course_details (subject_id, course_grade,course_name,course_description,course_duration,no_of_session,l_name) VALUES (%s, %s, %s, %s, %s, %s,%s)",[subjectid, grade,cname,description,cduration,nosession,ln])
+                cursor.execute("INSERT INTO course_details (subject_id, course_grade,course_name,course_description,course_duration,no_of_session,l_name,admin_id) VALUES (%s, %s, %s, %s, %s, %s,%s,%s)",[subjectid, grade,cname,description,cduration,nosession,ln,id])
                 mysql.connection.commit()
                 return jsonify('success')
             except Exception as Ex:

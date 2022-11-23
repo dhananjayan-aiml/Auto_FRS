@@ -150,6 +150,7 @@
                                     <th>Discourse Link</th>
                                     <th >Status</th>
                                     <th >Remarks</th>
+                                    <th >Negative FRS</th>
                                 </tr>
                             </thead>
                         
@@ -171,7 +172,16 @@
                                     <td><a href="{{row.course_grade}}" target="_blank">LP{{row.l_name}}</a></td>
                                     <td> <a href="{{row.course_name}}" target="_blank">LM{{row.l_name}}</a> </td>
                                     <td> <a href=" {{row.course_description}}" target="_blank"> LV{{row.l_name}}</a></td>
-                                    <td>{{row.course_duration}}</td>
+                                    <td>
+                                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample1{{loop.index}}" aria-expanded="false" aria-controls="collapseExample">View DQ{{row.l_name}}</button>
+                                        <div class="collapse" id="collapseExample1{{loop.index}}">
+                                            <div class="card card-body">
+                                                <pre style="font-size:17px;" class="font-weight-normal">{{row.course_duration}}</pre>
+                                            </div>
+                                        </div>
+
+                                    </td>
+
                                     <td><a href="{{row.no_of_session}}" target="_blank"> DL{{row.l_name}}</a></td>
                                         {% if row.course_status == "pending" %}
                                     <td><span class="badge badge-warning">{{row.course_status}}</span></td>
@@ -180,22 +190,16 @@
                                       {% elif row.course_status == "rejected" %}
                                     <td><span class="badge badge-danger">{{row.course_status}}</span></td>
                                     {% endif %}
-                                    <td>{{row.course_enroll_status}}</td>
-                                    
-<!--                                    {% if row.course_approval_status == "approved" %}-->
-<!--                                    <td><span class="badge badge-success">Approved</span></td>-->
-<!--                                    {% elif row.course_approval_status == "decline" %}-->
-<!--                                    <td><span class="badge badge-danger">Not Approved</span></td>{% endif %}-->
+                                           <td>
+                                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample2{{loop.index}}" aria-expanded="false" aria-controls="collapseExample">View DQ{{row.l_name}}</button>
+                                        <div class="collapse" id="collapseExample2{{loop.index}}">
+                                            <div class="card card-body">
+                                                <pre style="font-size:17px;" class="font-weight-normal">{{row.course_enroll_status}}</pre>
+                                            </div>
+                                        </div>
 
-<!--                                     <td class="action"><a type="button" name="view" value="view" id="{{row.course_id}}" class="btn btn-primary btn-xs view_data"><i class="fas fa-pencil-alt"></i></a>-->
-<!--                                        {% if row.course_approval_status == "approved" %}-->
-<!--                                        <a type="button" href="/data_entry/course/registered?course_id={{row.course_id}}" class="btn btn-warning btn-xs "><i class="fas fa-arrow-circle-right"></i></a>-->
-<!--                                        {% endif %}-->
-<!--                                        {% if row.course_approval_status == "decline" %}-->
-<!--                                        <button type="submit" name="delete" value="{{row.course_id}}"-->
-<!--                                            onclick="return validateForm()" class="btn btn-danger "> <i-->
-<!--                                                class="fas fa-trash"></i> </button></td>-->
-<!--                                                {% endif %}-->
+                                    </td>
+                                    <td>{{row.nfrs}}</td>
                                     
 
                                 </tr>

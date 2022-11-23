@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2022 at 06:57 PM
+-- Generation Time: Nov 23, 2022 at 07:20 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -88,19 +88,23 @@ CREATE TABLE `course_details` (
   `course_grade` varchar(1000) DEFAULT NULL,
   `course_name` varchar(1000) DEFAULT NULL,
   `l_name` varchar(5) DEFAULT NULL,
-  `course_code` varchar(100) NOT NULL
+  `course_code` varchar(100) NOT NULL,
+  `nfrs` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `course_details`
 --
 
-INSERT INTO `course_details` (`course_id`, `subject_id`, `course_description`, `course_duration`, `no_of_session`, `course_status`, `course_enroll_status`, `course_timestamp`, `admin_id`, `course_grade`, `course_name`, `l_name`, `course_code`) VALUES
-(7, 3, 'https://www.youtube.com/watch?v=o5F8MOz_IDw', 'adsf', 'https://www.youtube.com/watch?v=o5F8MOz_IDw', 'pending', '-', '2022-11-22 06:36:53', NULL, 'o', 'g', '5', '212AM101'),
-(8, 5, 'https://www.youtube.com/watch?v=o5F8MOz_IDw', 'asdf', 'https://www.youtube.com/watch?v=o5F8MOz_IDw', 'pending', '-', '2022-11-22 06:38:13', NULL, 'asdf', 'asdf', '2', '212AM306'),
-(9, 4, 'https://www.youtube.com/watch?v=o5F8MOz_IDw', 'zxcvzxcv', 'https://www.youtube.com/watch?v=o5F8MOz_IDw', 'pending', '-', '2022-11-22 06:39:09', NULL, 'dd', 'g', '3', '212AM201'),
-(10, 1, 'https://www.youtube.com/watch?v=o5F8MOz_IDw', 'Applications of Probability. Difference between Variables and Constants List the Axioms of probability What is mean by conditional probability? ', 'https://www.youtube.com/watch?v=o5F8MOz_IDw', 'pending', '-', '2022-11-22 07:32:47', NULL, 'd', 'sd', '4', '212AD101'),
-(14, 1, 'https://drive.google.com/file/d/1hHCbal5aWfdB584i4u2nhD3qDn_Elgl-/view?usp=sharing', 'serfasdfasdf', 'https://drive.google.com/file/d/1hHCbal5aWfdB584i4u2nhD3qDn_Elgl-/view?usp=sharing', 'pending', '-', '2022-11-22 08:12:01', NULL, 'https://drive.google.com/file/d/1hHCbal5aWfdB584i4u2nhD3qDn_Elgl-/view?usp=sharing', 'https://drive.google.com/file/d/1hHCbal5aWfdB584i4u2nhD3qDn_Elgl-/view?usp=sharing', '3', '212IT101');
+INSERT INTO `course_details` (`course_id`, `subject_id`, `course_description`, `course_duration`, `no_of_session`, `course_status`, `course_enroll_status`, `course_timestamp`, `admin_id`, `course_grade`, `course_name`, `l_name`, `course_code`, `nfrs`) VALUES
+(7, 3, 'https://www.youtube.com/watch?v=o5F8MOz_IDw', 'adsf', 'https://www.youtube.com/watch?v=o5F8MOz_IDw', 'rejected', ' Rejected entries - Unit-3 --> LessonPlan-5 | DiscourseLink-5 | DiscussionQuestion-5 lp has no mind map ', '2022-11-22 06:36:53', 1, 'o', 'g', '5', '212AM101', 20),
+(8, 5, 'https://www.youtube.com/watch?v=o5F8MOz_IDw', 'asdf', 'https://www.youtube.com/watch?v=o5F8MOz_IDw', 'pending', '-', '2022-11-22 06:38:13', 1, 'asdf', 'asdf', '2', '212AM306', NULL),
+(9, 4, 'https://www.youtube.com/watch?v=o5F8MOz_IDw', 'zxcvzxcv', 'https://www.youtube.com/watch?v=o5F8MOz_IDw', 'pending', '-', '2022-11-22 06:39:09', 1, 'dd', 'g', '3', '212AM202', NULL),
+(10, 1, 'https://www.youtube.com/watch?v=o5F8MOz_IDw', '123 1213', 'https://www.youtube.com/watch?v=o5F8MOz_IDw', 'pending', '-', '2022-11-22 07:32:47', 1, 'd', 'sd', '4', '212AM101', NULL),
+(14, 1, 'https://drive.google.com/file/d/1hHCbal5aWfdB584i4u2nhD3qDn_Elgl-/view?usp=sharing', 'serfasdfgarfasdgasdf asdfasdfasdfasdfasdfasdfas dfasdfasdfasdfasdfasdfasdf asdfasdfasdfasdffasdf', 'https://drive.google.com/file/d/1hHCbal5aWfdB584i4u2nhD3qDn_Elgl-/view?usp=sharing', 'approved', '- ', '2022-11-22 08:12:01', 1, 'https://drive.google.com/file/d/1hHCbal5aWfdB584i4u2nhD3qDn_Elgl-/view?usp=sharing', 'https://drive.google.com/file/d/1hHCbal5aWfdB584i4u2nhD3qDn_Elgl-/view?usp=sharing', '3', '212IT101', 0),
+(15, 5, 'https://drive.google.com/file/d/1hHCbal5aWfdB584i4u2nhD3qDn_Elgl-/view?usp=sharing', 'dq1 dq2 dq3', 'https://www.youtube.com/watch?v=o5F8MOz_IDw', 'pending', '-', '2022-11-23 04:23:33', 1, 'youtube.com', 'https://drive.google.com/file/d/1hHCbal5aWfdB584i4u2nhD3qDn_Elgl-/view?usp=sharing', '4', '212AM101', NULL),
+(16, 3, 'asdf', '123 123 123k ', 'df', 'pending', '-', '2022-11-23 07:36:46', 1, 'asdf', 'asdf', '2', '212AM101', NULL),
+(17, 3, 'asdf', '1. How can you view the bivariat random variables in engineering fields?                \n2. Do you know any mathematical and statistical tool that allows you to view your data\'s in a different field to analyse?\n3. How can you identify the various types of bivariate random variables ?', 'asdf', 'pending', '-', '2022-11-23 08:09:05', 1, 'asdf', 'asdf', '4', '212AM101', NULL);
 
 -- --------------------------------------------------------
 
@@ -179,7 +183,6 @@ CREATE TABLE `faculty_details` (
   `faculty_email` varchar(50) DEFAULT NULL,
   `faculty_contact` varchar(50) DEFAULT NULL,
   `faculty_timestamp` timestamp NULL DEFAULT current_timestamp(),
-  `pfrs` int(11) NOT NULL DEFAULT 0,
   `nfrs` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -187,10 +190,10 @@ CREATE TABLE `faculty_details` (
 -- Dumping data for table `faculty_details`
 --
 
-INSERT INTO `faculty_details` (`faculty_id`, `faculty_name`, `faculty_email`, `faculty_contact`, `faculty_timestamp`, `pfrs`, `nfrs`) VALUES
-(1, 'anooshkavin', 'anooshkavin@gmail.com', '9562513517', '2021-05-27 05:54:05', 0, 0),
-(4, 'Kishore', 'kishoredurai7@gmail.com', '9787688154', '2021-06-02 04:29:48', 0, 0),
-(5, 'sad', 'asdasd@kflg.com', '97876881544', '2021-06-03 10:52:25', 0, 0);
+INSERT INTO `faculty_details` (`faculty_id`, `faculty_name`, `faculty_email`, `faculty_contact`, `faculty_timestamp`, `nfrs`) VALUES
+(1, 'anooshkavin', 'anooshkavin@gmail.com', '9562513517', '2021-05-27 05:54:05', 0),
+(4, 'Kishore', 'kishoredurai7@gmail.com', '9787688154', '2021-06-02 04:29:48', 0),
+(5, 'sad', 'asdasd@kflg.com', '97876881544', '2021-06-03 10:52:25', 0);
 
 -- --------------------------------------------------------
 
@@ -416,7 +419,7 @@ ALTER TABLE `course_dept`
 -- AUTO_INCREMENT for table `course_details`
 --
 ALTER TABLE `course_details`
-  MODIFY `course_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `course_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `course_enroll_details`

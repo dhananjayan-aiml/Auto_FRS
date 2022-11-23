@@ -85,21 +85,60 @@ def admin_entry_course_select():
 def admin_entry_course_change():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     if request.method == "POST":
-        print('hi')
-        course_id = request.form['course_id']
-        course_name = request.form['course_name']
-        course_duration = request.form['course_duration']
-        course_grade = request.form['course_grade']
-        no_of_session = request.form['no_of_session']
-        #status = request.form['status']
-        course_approval_status = request.form['course_approval_status']
-        print(course_approval_status)
-        course_description = request.form['test']
-        cursor.execute(
-            'update course_details set course_name=%s, course_duration = %s ,course_grade=%s,no_of_session=%s , course_approval_status=%s ,course_description=%s where course_id=%s',
-            [course_name, course_duration,course_grade, no_of_session, course_approval_status, course_description, course_id])
+        index = request.args.get('a')
+        print('option1'+index)
+        course_code = request.form['cid'+index]
+        course_id = request.form['id'+index]
+        lesson_id = request.form['l'+index]
+        subject_id=str(lesson_id[1])
+        lesson_id=str(lesson_id[0])
+        remarks = ''
+        try:
+            check1 = int(request.form['option1' + index])
+        except:
+            check1 = 0
+        try:
+            check2 = int(request.form['option2' + index])
+        except:
+            check2 = 0
+        try:
+            check3 = int(request.form['option3' + index])
+        except:
+            check3 = 0
+        try:
+            check4 = int(request.form['option4' + index])
+        except:
+            check4 = 0
+        try:
+            check5 = int(request.form['option5' + index])
+        except:
+            check5 = 0
+        addRemarks = request.form['ta'+index]
+        if check1 + check2 + check3 + check4 + check5 < 50 :
+            status="rejected"
+            remarks += " Rejected entries - "
+            remarks += 'Unit-' + subject_id + " --> "
+            if check1 == 0:
+                remarks += "LectureMaterial-"+lesson_id+" | "
+            if check2 == 0:
+                remarks += "LessonPlan-"+lesson_id+" | "
+            if check3 == 0:
+                remarks += "LectureVideo-"+lesson_id+" | "
+            if check4 == 0:
+                remarks += "DiscourseLink-"+lesson_id+" | "
+            if check5 == 0:
+                remarks += "DiscussionQuestion-"+lesson_id+" "
+            remarks += addRemarks
+            nfrs=check1 + check2 + check3 + check4 + check5
+        else:
+            status="approved"
+            remarks = "-"
+            nfrs=0
+        print(check1, check2, check3, check4, check5, remarks)
+        cursor.execute(f'update course_details set course_status="{status}", course_enroll_status = "{remarks} ", nfrs = "{nfrs}" where course_id={course_id}')
         mysql.connection.commit()
-    return jsonify('success')
+    return redirect(url_for('admin_analytics_one_course',a=course_code))
+    # return jsonify("success")
 
 
 #########################################  Course Table ###############################################
@@ -205,7 +244,7 @@ def admin_analytics_one_course():
         admin_name = session.get('name')
         subject_id=request.args.get('a')
 
-        cursor.execute(f'SELECT * FROM course_details Where course_details.course_code="{subject_id}" ')
+        cursor.execute(f'SELECT * FROM course_details Where course_details.course_code="{subject_id}" and course_details.course_status="pending" ')
         course = cursor.fetchall()
         cursor.execute('SELECT * FROM subject')
         subject = cursor.fetchall()
@@ -271,7 +310,7 @@ def admin_analytics_session():
         cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id')
         course = cursor.fetchall()
 
-    
+
 
         cursor.execute('SELECT * FROM faculty_details')
         faculty = cursor.fetchall()
@@ -340,9 +379,7 @@ def admin_entry_session_change():
         session_endtime = request.form['session_endtime']
         print(session_starttime)
         session_discription = request.form['test']
-        cursor.execute(
-            'update course_session_details set session_date=%s,session_name = %s ,session_status=%s , session_starttime=%s ,session_endtime=%s ,session_discription=%s where session_id=%s',
-            [ session_date,session_name, session_status, session_starttime,session_endtime, session_discription, session_id])
+        cursor.execute('update course_session_details set session_date=%s,session_name = %s ,session_status=%s , session_starttime=%s ,session_endtime=%s ,session_discription=%s where session_id=%s',[ session_date,session_name, session_status, session_starttime,session_endtime, session_discription, session_id])
         mysql.connection.commit()
     return jsonify('success')
 ####################################### Session table end ############################################
@@ -580,7 +617,7 @@ def attendance():
         attendance = cursor.fetchall()
         cursor.execute("SELECT  sd.session_name from course_session_details sd  where  session_id=%s",[session_id])
         course = cursor.fetchall()
-        print(attendance)    
+        print(attendance)
         cursor.execute("SELECT count(satt_present) as present from student_attendance  where satt_present='YES' and  session_id=%s",[session_id])
         present = cursor.fetchone()
 
@@ -679,7 +716,7 @@ def admin_analytics_user_change():
         admin_id = request.form['admin_id']
         admin_name = request.form['admin_name']
         admin_username = request.form['admin_username']
-        
+
         admin_password = request.form['admin_password']
         password = hashlib.md5(admin_password.encode())
         pwd=password.hexdigest()
