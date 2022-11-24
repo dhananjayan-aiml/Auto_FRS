@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2022 at 07:20 PM
+-- Generation Time: Nov 24, 2022 at 09:21 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -97,14 +97,14 @@ CREATE TABLE `course_details` (
 --
 
 INSERT INTO `course_details` (`course_id`, `subject_id`, `course_description`, `course_duration`, `no_of_session`, `course_status`, `course_enroll_status`, `course_timestamp`, `admin_id`, `course_grade`, `course_name`, `l_name`, `course_code`, `nfrs`) VALUES
-(7, 3, 'https://www.youtube.com/watch?v=o5F8MOz_IDw', 'adsf', 'https://www.youtube.com/watch?v=o5F8MOz_IDw', 'rejected', ' Rejected entries - Unit-3 --> LessonPlan-5 | DiscourseLink-5 | DiscussionQuestion-5 lp has no mind map ', '2022-11-22 06:36:53', 1, 'o', 'g', '5', '212AM101', 20),
-(8, 5, 'https://www.youtube.com/watch?v=o5F8MOz_IDw', 'asdf', 'https://www.youtube.com/watch?v=o5F8MOz_IDw', 'pending', '-', '2022-11-22 06:38:13', 1, 'asdf', 'asdf', '2', '212AM306', NULL),
-(9, 4, 'https://www.youtube.com/watch?v=o5F8MOz_IDw', 'zxcvzxcv', 'https://www.youtube.com/watch?v=o5F8MOz_IDw', 'pending', '-', '2022-11-22 06:39:09', 1, 'dd', 'g', '3', '212AM202', NULL),
-(10, 1, 'https://www.youtube.com/watch?v=o5F8MOz_IDw', '123 1213', 'https://www.youtube.com/watch?v=o5F8MOz_IDw', 'pending', '-', '2022-11-22 07:32:47', 1, 'd', 'sd', '4', '212AM101', NULL),
-(14, 1, 'https://drive.google.com/file/d/1hHCbal5aWfdB584i4u2nhD3qDn_Elgl-/view?usp=sharing', 'serfasdfgarfasdgasdf asdfasdfasdfasdfasdfasdfas dfasdfasdfasdfasdfasdfasdf asdfasdfasdfasdffasdf', 'https://drive.google.com/file/d/1hHCbal5aWfdB584i4u2nhD3qDn_Elgl-/view?usp=sharing', 'approved', '- ', '2022-11-22 08:12:01', 1, 'https://drive.google.com/file/d/1hHCbal5aWfdB584i4u2nhD3qDn_Elgl-/view?usp=sharing', 'https://drive.google.com/file/d/1hHCbal5aWfdB584i4u2nhD3qDn_Elgl-/view?usp=sharing', '3', '212IT101', 0),
-(15, 5, 'https://drive.google.com/file/d/1hHCbal5aWfdB584i4u2nhD3qDn_Elgl-/view?usp=sharing', 'dq1 dq2 dq3', 'https://www.youtube.com/watch?v=o5F8MOz_IDw', 'pending', '-', '2022-11-23 04:23:33', 1, 'youtube.com', 'https://drive.google.com/file/d/1hHCbal5aWfdB584i4u2nhD3qDn_Elgl-/view?usp=sharing', '4', '212AM101', NULL),
-(16, 3, 'asdf', '123 123 123k ', 'df', 'pending', '-', '2022-11-23 07:36:46', 1, 'asdf', 'asdf', '2', '212AM101', NULL),
-(17, 3, 'asdf', '1. How can you view the bivariat random variables in engineering fields?                \n2. Do you know any mathematical and statistical tool that allows you to view your data\'s in a different field to analyse?\n3. How can you identify the various types of bivariate random variables ?', 'asdf', 'pending', '-', '2022-11-23 08:09:05', 1, 'asdf', 'asdf', '4', '212AM101', NULL);
+(7, 3, 'https://www.youtube.com/watch?v=o5F8MOz_IDw', 'Suggest the possible ways to organize the student details in an Institute / Organization \nHow to extract the needed information or data from the data store ?\nState the reason : Database is better choice than the file system storage\nCompare data redundancy and consistency\nHow to control concurrent access in a centralized data ?', 'https://discourse.bitsathy.ac.in/t/unit-1-constructor-and-destructor-in-c/24382', 'rejected', ' Rejected entries : Unit-3 --> LessonPlan-5 | LectureVideo-5 | DiscussionQuestion-5 | lp was not good ', '2022-11-22 06:36:53', 1, 'https://drive.google.com/file/d/1nDEEEBi-iCk3zdEAf-ZE8ibYra9YHf3b/view?usp=sharing', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/view?usp=sharing', '5', '212AM101', 30),
+(8, 5, 'https://www.youtube.com/watch?v=o5F8MOz_IDw', '1. Why do you think Java is not a pure object oriented language?\n\n2. Pointers are used in C/ C++. Why does Java not make use of pointers?\n\n3. What do you understand by Object and Class?\n\n4. Compare JVM, JDK, and JRE to understand the differences.\n\n5. What do you think are the advantages of using Java?', 'https://discourse.bitsathy.ac.in/t/unit-ii-queue-and-its-operations/24391', 'pending', '-', '2022-11-22 06:38:13', 1, 'https://drive.google.com/file/d/1nDEEEBi-iCk3zdEAf-ZE8ibYra9YHf3b/view?usp=sharing', 'https://drive.google.com/file/d/1TdbN1enPGKnFfw3mJ8ASmEqz9vYawzwB/view?usp=sharing', '2', '212AM306', NULL),
+(9, 4, 'https://www.youtube.com/watch?v=o5F8MOz_IDw', '1. Explain the role of scriplets in JSP tags?\n\n2. Did page directives can include other pages?\n\n3. Explain the importance of JSP declaration tags?', 'https://discourse.bitsathy.ac.in/t/unit-iv-minimum-spanning-tree/24399', 'rejected', ' Rejected entries : Unit-4 --> LectureVideo-3 | DiscourseLink-3 | DiscussionQuestion-3 |  ', '2022-11-22 06:39:09', 1, 'https://drive.google.com/file/d/1nDEEEBi-iCk3zdEAf-ZE8ibYra9YHf3b/view?usp=sharing', 'https://drive.google.com/file/d/1qUhuHu19_9zh-6bj_OMfiAgfDavLm_3S/view?usp=sharing', '3', '212AM202', 30),
+(10, 1, 'https://www.youtube.com/watch?v=o5F8MOz_IDw', '1. Can we write only try block without catch and finally blocks?\n\n2. There are three statements in a try block – statement1, statement2 and statement3. After that there is a catch block to catch the exceptions occurred in the try block. Assume that exception has occurred in statement2. Does statement3 get executed or not?\n\n3. Does finally block get executed If either try or catch blocks are returning the control?\n\n4. Why is it always recommended to keep clean up operations like closing the DB resources inside a finally block?', 'https://discourse.bitsathy.ac.in/t/unit-ii-stack-and-its-operations/24390', 'rejected', ' Rejected entries : Unit-1 --> LectureMaterial-4 | LessonPlan-4 | LectureVideo-4 | DiscourseLink-4 | DiscussionQuestion-4 |  ', '2022-11-22 07:32:47', 1, 'https://drive.google.com/file/d/1nDEEEBi-iCk3zdEAf-ZE8ibYra9YHf3b/view?usp=sharing', 'https://drive.google.com/file/d/17SCMzfwuugUDr-RmqLjaQ-_VsXiO1bTo/view?usp=sharing', '4', '212AM101', 50),
+(14, 1, 'https://drive.google.com/file/d/1hHCbal5aWfdB584i4u2nhD3qDn_Elgl-/view?usp=sharing', '1. Differentiate primary index and secondary index.\n2. How hashing table minimize the searching time of a record?\n3. How memory address of the data block is calculated by using hash function?', 'https://discourse.bitsathy.ac.in/t/unit-1-topic-1-introduction/19894?u=kiruthika_v_r', 'approved', '- ', '2022-11-22 08:12:01', 1, 'https://drive.google.com/file/d/1nDEEEBi-iCk3zdEAf-ZE8ibYra9YHf3b/view?usp=sharing', 'https://drive.google.com/file/d/1nDEEEBi-iCk3zdEAf-ZE8ibYra9YHf3b/view?usp=sharing', '3', '212IT101', 0),
+(15, 5, 'https://drive.google.com/file/d/1hHCbal5aWfdB584i4u2nhD3qDn_Elgl-/view?usp=sharing', 'What is null and alternate hypothesis?\nInterpret the connection between null hypothesis and critical values.', 'https://discourse.bitsathy.ac.in/t/unit-2-topic-3-relational-model-and-database-design/20603?u=kiruthika_v_r', 'pending', '-', '2022-11-23 04:23:33', 1, 'https://drive.google.com/file/d/1nDEEEBi-iCk3zdEAf-ZE8ibYra9YHf3b/view?usp=sharing', 'https://drive.google.com/file/d/1KJU0GgSX7xL--PxCaN4LvcC7LObp_dmC/view?usp=sharing', '4', '212AM101', NULL),
+(16, 3, 'https://www.youtube.com/watch?v=lCOlS_qn8RQ', 'can we do the test of hypothesis about the difference between two means?\ncan we do the test of hypothesis about the difference between two mean with dependent samples?\nwhat is degrees of freedom.', 'https://discourse.bitsathy.ac.in/t/unit-2-topic-3-relational-model-and-database-design/20603?u=kiruthika_v_r', 'pending', '-', '2022-11-23 07:36:46', 1, 'https://drive.google.com/file/d/1nDEEEBi-iCk3zdEAf-ZE8ibYra9YHf3b/view?usp=sharing', 'https://drive.google.com/file/d/1Wxr8vC7I_pjuaGvNfeflZ6ZTXTYTELHE/view?usp=sharing', '2', '212AM101', NULL),
+(17, 3, 'https://www.youtube.com/watch?v=lCOlS_qn8RQ', '1. How can you view the bivariat random variables in engineering fields?                \n2. Do you know any mathematical and statistical tool that allows you to view your data\'s in a different field to analyse?\n3. How can you identify the various types of bivariate random variables ?', 'https://discourse.bitsathy.ac.in/t/unit-2-topic-3-relational-model-and-database-design/20603?u=kiruthika_v_r', 'pending', '-', '2022-11-23 08:09:05', 1, 'https://drive.google.com/file/d/1nDEEEBi-iCk3zdEAf-ZE8ibYra9YHf3b/view?usp=sharing', 'https://drive.google.com/file/d/1TdbN1enPGKnFfw3mJ8ASmEqz9vYawzwB/view?usp=sharing', '4', '212AM101', NULL);
 
 -- --------------------------------------------------------
 
@@ -174,6 +174,22 @@ INSERT INTO `department` (`dept_id`, `dept_name`, `dept_no`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `entry_details`
+--
+
+CREATE TABLE `entry_details` (
+  `entry_id` int(11) NOT NULL,
+  `faculty_id` int(100) NOT NULL,
+  `sub_lecture` varchar(1000) NOT NULL,
+  `negative_rp` int(11) NOT NULL,
+  `positive_rp` int(11) NOT NULL,
+  `remarks` varchar(1000) NOT NULL,
+  `failed_values` varchar(1000) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `faculty_details`
 --
 
@@ -192,7 +208,7 @@ CREATE TABLE `faculty_details` (
 
 INSERT INTO `faculty_details` (`faculty_id`, `faculty_name`, `faculty_email`, `faculty_contact`, `faculty_timestamp`, `nfrs`) VALUES
 (1, 'anooshkavin', 'anooshkavin@gmail.com', '9562513517', '2021-05-27 05:54:05', 0),
-(4, 'Kishore', 'kishoredurai7@gmail.com', '9787688154', '2021-06-02 04:29:48', 0),
+(4, 'kishore', 'kishoredurai7@gmail.com', '9787688154', '2021-06-02 04:29:48', 110),
 (5, 'sad', 'asdasd@kflg.com', '97876881544', '2021-06-03 10:52:25', 0);
 
 -- --------------------------------------------------------
@@ -348,14 +364,19 @@ ALTER TABLE `course_enroll_details`
 -- Indexes for table `course_session_details`
 --
 ALTER TABLE `course_session_details`
-  ADD PRIMARY KEY (`session_id`),
-  ADD KEY `faculty_forignkey` (`faculty_id`);
+  ADD PRIMARY KEY (`session_id`);
 
 --
 -- Indexes for table `department`
 --
 ALTER TABLE `department`
   ADD PRIMARY KEY (`dept_no`);
+
+--
+-- Indexes for table `entry_details`
+--
+ALTER TABLE `entry_details`
+  ADD PRIMARY KEY (`entry_id`);
 
 --
 -- Indexes for table `faculty_details`
@@ -438,6 +459,12 @@ ALTER TABLE `course_session_details`
 --
 ALTER TABLE `department`
   MODIFY `dept_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `entry_details`
+--
+ALTER TABLE `entry_details`
+  MODIFY `entry_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `faculty_details`

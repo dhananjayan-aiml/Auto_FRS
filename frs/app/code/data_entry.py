@@ -14,14 +14,14 @@ def data_entry_home():
         home = arr.array('i', [0, 0, 0, 0])
 
         admin_name=session.get('name')
-        cursor.execute('SELECT * FROM course_session_details')
+        cursor.execute('SELECT * FROM course_details')
         home[0] = len(cursor.fetchall())
       
-        cursor.execute('SELECT * FROM student_details')
+        cursor.execute('SELECT * FROM course_details where course_status="approved"')
         home[1] = len(cursor.fetchall())
-        cursor.execute('SELECT * FROM course_details')
-        home[2] = len(cursor.fetchall())
-        cursor.execute('SELECT * FROM faculty_details')
+        cursor.execute('SELECT nfrs FROM faculty_details where faculty_id=4')
+        home[2] = cursor.fetchall()[0]['nfrs']
+        cursor.execute('SELECT * FROM course_details where course_status="rejected"')
         home[3] = len(cursor.fetchall())
         # cursor.execute('SELECT * FROM notification,admin where notification_from=admin.admin_id and notification.admin_id=%s and notification_status="unread" LIMIT 4',[id])
         # notifi = cursor.fetchall()

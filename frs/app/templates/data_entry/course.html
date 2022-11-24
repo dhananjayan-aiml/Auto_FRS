@@ -17,8 +17,8 @@
             <h1 class="h3 mb-0 text-gray-800">Course Details </h1>
             <!-- <button id="export" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                     class="fas fa-download fa-sm text-white-50"></i> Generate Report</button> -->
-                    <a  class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm export-btn" style="color: white;"><i
-                        class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+<!--                    <a  class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm export-btn" style="color: white;"><i-->
+<!--                        class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>-->
         </div>
 
         <div class="d-sm-flex align-items-start justify-content-md-around mb-4">
@@ -40,7 +40,7 @@
                         </div>
                         <div class="col-auto">
 
-                            <i class="fas fa-laptop fa-2x text-gray-300"></i>
+                            <i class="fas fa-calculator fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{count[0]}}</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-user-graduate fa-2x text-gray-300"></i>
+                            <i class="fas fa-check fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{count[1]}}</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-user-graduate fa-2x text-gray-300"></i>
+                            <i class="fas fa-clock-o fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -99,7 +99,7 @@
                             </div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-book-reader fa-2x text-gray-300"></i>
+                            <i class="fas fa-close fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -158,7 +158,7 @@
                                 {% for row in course %}
                                 <tr>
 
-                                    <td>{{loop.index}}</td>
+                                    <td>{{row.course_id}}</td>
                                     <td>{{row.subject_name}}</td>
 <!--                                    <td>-->
 <!--                                        {% if row.course_approval_status == "approved" %}-->
@@ -191,10 +191,10 @@
                                     <td><span class="badge badge-danger">{{row.course_status}}</span></td>
                                     {% endif %}
                                            <td>
-                                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample2{{loop.index}}" aria-expanded="false" aria-controls="collapseExample">View DQ{{row.l_name}}</button>
+                                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample2{{loop.index}}" aria-expanded="false" aria-controls="collapseExample">View </button>
                                         <div class="collapse" id="collapseExample2{{loop.index}}">
                                             <div class="card card-body">
-                                                <pre style="font-size:17px;" class="font-weight-normal">{{row.course_enroll_status}}</pre>
+                                                <p style="font-size:17px;" class="font-weight-normal">{{row.course_enroll_status}}</p>
                                             </div>
                                         </div>
 

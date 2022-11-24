@@ -114,28 +114,33 @@ def admin_entry_course_change():
         except:
             check5 = 0
         addRemarks = request.form['ta'+index]
+        nfrs=0
         if check1 + check2 + check3 + check4 + check5 < 50 :
             status="rejected"
-            remarks += " Rejected entries - "
+            remarks += " Rejected entries : "
             remarks += 'Unit-' + subject_id + " --> "
             if check1 == 0:
+                nfrs+=10
                 remarks += "LectureMaterial-"+lesson_id+" | "
             if check2 == 0:
+                nfrs+=10
                 remarks += "LessonPlan-"+lesson_id+" | "
             if check3 == 0:
+                nfrs+=10
                 remarks += "LectureVideo-"+lesson_id+" | "
             if check4 == 0:
+                nfrs+=10
                 remarks += "DiscourseLink-"+lesson_id+" | "
             if check5 == 0:
-                remarks += "DiscussionQuestion-"+lesson_id+" "
+                nfrs+=10
+                remarks += "DiscussionQuestion-"+lesson_id+" | "
             remarks += addRemarks
-            nfrs=check1 + check2 + check3 + check4 + check5
         else:
             status="approved"
             remarks = "-"
-            nfrs=0
         print(check1, check2, check3, check4, check5, remarks)
         cursor.execute(f'update course_details set course_status="{status}", course_enroll_status = "{remarks} ", nfrs = "{nfrs}" where course_id={course_id}')
+        cursor.execute(f'update faculty_details set  nfrs = nfrs+ "{nfrs}" where faculty_id=4')
         mysql.connection.commit()
     return redirect(url_for('admin_analytics_one_course',a=course_code))
     # return jsonify("success")

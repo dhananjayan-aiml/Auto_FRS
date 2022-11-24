@@ -31,9 +31,13 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Course Table </h1>
+        <h1 class="h3 mb-2 text-gray-800">Entry Approval </h1>
         <h3 class="mb-4" >
-         <span>Subject : {{dept[0].course_name}} </span>   <span>Course Code : {{course[0].course_code}} </span>
+            {%if course and dept%}
+         <span style="margin-left:3%">Subject : {{dept[0].course_name}} </span>   <span style="margin-left:18%">Course Code : {{course[0].course_code}} </span>
+            {%else%}
+            <span> </span>
+            {%endif%}
         </h3>
 
         <!-- DataTales Example -->
