@@ -25,7 +25,12 @@ def data_entry_home():
         home[3] = len(cursor.fetchall())
         # cursor.execute('SELECT * FROM notification,admin where notification_from=admin.admin_id and notification.admin_id=%s and notification_status="unread" LIMIT 4',[id])
         # notifi = cursor.fetchall()
-        return render_template('data_entry/index.html',admin_name=admin_name,count=home)
+        cursor.execute('SELECT course_code from course_faculty')
+        course_faculty = cursor.fetchall()
+        course_code = []
+        for i in course_faculty:
+            course_code.append(i['course_code'])
+        return render_template('data_entry/index.html',admin_name=admin_name,count=home,course_faculty=course_code)
     else:
         return redirect(url_for('login'))
 
@@ -103,10 +108,16 @@ def data_entry_course():
         id=session.get('id')
         count = arr.array('i', [0, 0, 0])
         admin_name=session.get('name')
-        subject_id = request.args.get('course_id')  
+        subject_id = request.args.get('course_id')
+
+        cursor.execute('SELECT course_code from course_faculty')
+        course_faculty = cursor.fetchall()
+        course_code =[]
+        cc=request.args.get('a')
+        for i in course_faculty:
+            course_code.append(i['course_code'])
         if request.method == 'POST':      
             # adminid=session.get('id')
-
             subjectid = request.form['subjectid']
             cname = request.form['cname']
             ln=request.form['ln']
@@ -117,6 +128,7 @@ def data_entry_course():
             cduration = request.form['duration']
             nosession = request.form['session']
             description = request.form['coursedes']
+            course = request.form['course']
             print(cduration)
             # basepath = os.path.dirname(__file__)
             # file_path = os.path.join(basepath, secure_filename(file.filename))
@@ -125,7 +137,8 @@ def data_entry_course():
             # file.save(os.path.join(app.root_path, f'static/uploads/pdf/{subjectid}-{grade}.{extension}'))
             # student_id = "uploads/pdf/{0}-{1}.pdf".format(subjectid, grade)
             try:
-                cursor.execute("INSERT INTO course_details (subject_id, course_grade,course_name,course_description,course_duration,no_of_session,l_name,admin_id) VALUES (%s, %s, %s, %s, %s, %s,%s,%s)",[subjectid, grade,cname,description,cduration,nosession,ln,id])
+                print(course)
+                cursor.execute("INSERT INTO course_details (subject_id, course_grade,course_name,course_description,course_duration,no_of_session,l_name,admin_id,course_code) VALUES (%s, %s, %s, %s, %s, %s,%s,%s,%s)",[subjectid, grade,cname,description,cduration,nosession,ln,id,course,])
                 mysql.connection.commit()
                 return jsonify('success')
             except Exception as Ex:
@@ -143,7 +156,7 @@ def data_entry_course():
 
 
         else:
-            cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id')
+            cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id and course_details.course_code=%s',[cc])
             course = cursor.fetchall()
             cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id  and course_details.course_status="approved"')
             count[0] = len(cursor.fetchall())
@@ -154,13 +167,15 @@ def data_entry_course():
 
         cursor.execute('SELECT * FROM subject')
         subject = cursor.fetchall()
+        # admin_id=course[0]['admin_id']
+
         for i in range(len(course)):
             # course[i]['course_description'] = html.unescape(course[i]['course_description'])
             print(course[i]['course_description'], i)
 
         # cursor.execute('SELECT * FROM notification,admin where notification_from=admin.admin_id and notification.admin_id=%s and notification_status="unread" LIMIT 4',[id])
         # notifi = cursor.fetchall()
-        return render_template('data_entry/course.html',course=course,subject=subject,count=count,admin_name=admin_name)
+        return render_template('data_entry/course.html',course=course,subject=subject,count=count,admin_name=admin_name,course_faculty=course_code,cc=cc)
     else:
         return redirect(url_for('login'))
 

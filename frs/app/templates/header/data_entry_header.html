@@ -112,9 +112,9 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Course Code:</h6>
 <!--                    <a class="collapse-item" href="{{url_for('data_entry_subject')}}">Subject Table</a>-->
-                    <a class="collapse-item" href="{{url_for('data_entry_course')}}">21AM101</a>
-                    <a class="collapse-item" href="{{url_for('data_entry_course')}}">21AM201</a>
-                    <a class="collapse-item" href="{{url_for('data_entry_course')}}">21AM301</a>
+                    {% for row in course_faculty%}
+                    <a class="collapse-item" href="{{url_for('data_entry_course',a=row)}}">{{row}}</a>
+                    {%endfor%}
 <!--                    <a class="collapse-item" href="{{url_for('data_entry_session')}}">Session Table</a>-->
                 </div>
             </div>
