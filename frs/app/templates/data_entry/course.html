@@ -21,9 +21,9 @@
         </div>
 
         <div class="d-sm-flex align-items-start justify-content-md-around mb-4">
-            <h3 class="h5 mb-0 text-gray-800">Course Name : Artificial Intelligence And Machine Learning </h3><br>
-            <h3 class="h5 mb-0 text-gray-800">Course Code : 21AM101 </h3><br>
-            <h3 class="h5 mb-0 text-gray-800">Semester : 1 </h3>
+            <h3 class="h5 mb-0 text-gray-800">Course Name : {{cn}} </h3><br>
+            <h3 class="h5 mb-0 text-gray-800">Course Code : {{cc}} </h3><br>
+            <h3 class="h5 mb-0 text-gray-800">Semester : {{sem}} </h3>
         </div>
      <div class="row">
 
@@ -134,7 +134,6 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <p><br>{{course_faculty}}</p>
                     <form method="post" action="/data_entry/course/update">
 
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
@@ -186,7 +185,8 @@
         </button>
       </div>
       <div class="modal-body">
-<iframe src="{{row.course_name}}" title="W3Schools Free Online Web Tutorials"></iframe>
+          <iframe  src="https://www.codechef.com/" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<!--<iframe src="https://www.youtube.com/watch?v=JTxsNm9IdYU" title="W3Schools Free Online Web Tutorials"></iframe>-->
       </div>
     </div>
   </div>
@@ -217,7 +217,7 @@
                                     {% endif %}
                                            <td>
                                         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample2{{loop.index}}" aria-expanded="false" aria-controls="collapseExample">View </button>
-                                        <div class="collapse" id="collapseExample2{{loop.index}}">
+                                        <div class="collapse" id="collapseExample2{{loop.index}}" style="width:max-content">
                                             <div class="card card-body">
                                                 <p style="font-size:17px;" class="font-weight-normal">{{row.course_enroll_status}}</p>
                                             </div>

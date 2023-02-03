@@ -158,15 +158,21 @@ def data_entry_course():
         else:
             cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id and course_details.course_code=%s',[cc])
             course = cursor.fetchall()
-            cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id  and course_details.course_status="approved"')
+            cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id  and course_details.course_status="approved" and course_details.course_code=%s',[cc])
             count[0] = len(cursor.fetchall())
-            cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id  and course_details.course_status="pending"')
+            cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id  and course_details.course_status="pending" and course_details.course_code=%s',[cc])
             count[1] = len(cursor.fetchall())
-            cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id  and course_details.course_status="rejected"')
+            cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id  and course_details.course_status="rejected"and course_details.course_code=%s',[cc])
             count[2] = len(cursor.fetchall())
 
+        cursor.execute('select course_name from course_dept where course_code=%s',[cc])
+        cn=cursor.fetchall()
+        cn=cn[0]['course_name']
         cursor.execute('SELECT * FROM subject')
         subject = cursor.fetchall()
+
+        sem = cc[5]
+
         # admin_id=course[0]['admin_id']
 
         for i in range(len(course)):
@@ -175,7 +181,7 @@ def data_entry_course():
 
         # cursor.execute('SELECT * FROM notification,admin where notification_from=admin.admin_id and notification.admin_id=%s and notification_status="unread" LIMIT 4',[id])
         # notifi = cursor.fetchall()
-        return render_template('data_entry/course.html',course=course,subject=subject,count=count,admin_name=admin_name,course_faculty=course_code,cc=cc)
+        return render_template('data_entry/course.html',course=course,subject=subject,count=count,admin_name=admin_name,course_faculty=course_code,cc=cc,cn=cn,sem=sem)
     else:
         return redirect(url_for('login'))
 
