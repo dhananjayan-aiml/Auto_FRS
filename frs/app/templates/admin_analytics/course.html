@@ -3,6 +3,13 @@
 {% include 'header/analytics_header.html' %}
 
 <style>
+.text_blue{
+color:#4e73df;
+}
+.text_blue:hover{
+color:#2a4db3;
+text-decoration:underline;
+}
     #check1,#check2,#check3,#check4,#check5{
     scale:2;
     margin:5px 10px 0px 0px;
@@ -74,7 +81,7 @@
  <th data-field="dur"  >Discussion Question</th>
 
 <!--            <th data-field="approval_status" data-sortable="True" >Approval Status</th>-->
-              <th data-field="remarks" >Remarks</th>
+              <th data-field="remarks" >Additional Remarks</th>
 
 
 <!--&lt;!&ndash;            <th data-field="desc"  id="" data-sortable="True" >Course Description</th>&ndash;&gt;-->
@@ -156,10 +163,6 @@
    <script src="{{url_for('static',filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <script type="text/javascript" src="https://cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
 
-    {% for row in course %}
-    <b>{{row.course_description}}</b>
-    {% endfor %}
-
 <!--    <script src="{{url_for('static',filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>-->
  <script>
  var remarks = "";
@@ -178,9 +181,49 @@
         "fid":"<input type='hidden' name='l{{loop.index}}' value='{{row.l_name}}{{row.subject_id}}'>{{row.admin_id}}",
 <!--        "city": "{{row.course_code}}",-->
 "unit":"U{{row.subject_id}}",
-        "age": " <a href='{{row.course_name}}' target='_blank'> LM{{row.l_name}}</a><i class='fas fa-external-link;' aria-hidden='true'></i><input class='custom-input ' type='checkbox' id='check1' name='option1{{loop.index}}' value='10' >",
+<!--        "age": " <a href='{{row.course_name}}' target='_blank'> LM{{row.l_name}}</a><i class='fas fa-external-link;' aria-hidden='true'></i><input class='custom-input ' type='checkbox' id='check1' name='option1{{loop.index}}' value='10' >",-->
+          "age": `<a type="button" data-toggle="modal"
+                            data-target="#lpmodal{{row.course_id}}">
+                            <span class="text_blue">LM{{row.l_name}}</span>
+                        </a>
+                        <div class="modal fade" id="lpmodal{{row.course_id}}" tabindex="-1" role="dialog" aria-labelledby="lpmodal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl" role="document" >
+    <div class="modal-content ">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Unit {{row.subject_id}} - Lesson Material {{row.l_name}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <iframe  src="{{row.course_name}}" title="Lecture material" width="100%" height="800" allow="autoplay" ></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+                        <input class='custom-input ' type='checkbox' id='check1' name='option1{{loop.index}}' value='10' >`,
+
         "grade": "<a href='{{row.course_grade}}' target='_blank' > LP{{row.l_name}}</a><input class='custom-input' type='checkbox' id='check2' name='option2{{loop.index}}' value='10' >",
-        "lv": "<a href='{{row.course_description}}' target='_blank' > LV{{row.l_name}}</a><input class='custom-input' type='checkbox' id='check3' name='option3{{loop.index}}' value='10' >",
+<!--        "lv": "<a href='{{row.course_description}}' target='_blank' > LV{{row.l_name}}</a><input class='custom-input' type='checkbox' id='check3' name='option3{{loop.index}}' value='10' >",-->
+        "lv": `<a type="button" data-toggle="modal"
+                            data-target="#lvmodal{{row.course_id}}">
+                            <span class="text_blue">LV{{row.l_name}}</span>
+                        </a>
+                        <div class="modal fade" id="lvmodal{{row.course_id}}" tabindex="-1" role="dialog" aria-labelledby="lpmodal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl" role="document" >
+    <div class="modal-content ">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Unit {{row.subject_id}} - Lecture Video {{row.l_name}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <iframe  src="{{row.course_description}}" title="Lecture material" width="100%" height="800" allow="autoplay" ></iframe>
+      </div>
+    </div>
+  </div>
+</div><input class='custom-input' type='checkbox' id='check3' name='option3{{loop.index}}' value='10' >`,
         "desc": "{{(row.course_description.html)}}",
 
         "sess": "<a href='{{row.course_status}}' target='_blank' > DL{{row.l_name}}</a><input class='custom-input' type='checkbox' id='check4' name='option4{{loop.index}}' value='10' >",

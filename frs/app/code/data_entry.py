@@ -107,8 +107,8 @@ def data_entry_course():
     if 'id' in session and session.get("user_type") == 'data_entry':  
         id=session.get('id')
         count = arr.array('i', [0, 0, 0])
-        admin_name=session.get('name')
-        subject_id = request.args.get('course_id')
+        # admin_name=session.get('name')
+        # subject_id = request.args.get('course_id')
 
         cursor.execute('SELECT course_code from course_faculty')
         course_faculty = cursor.fetchall()
@@ -128,6 +128,10 @@ def data_entry_course():
             cduration = request.form['duration']
             nosession = request.form['session']
             description = request.form['coursedes']
+            cname_x = cname.rfind('/')
+            des_x = description.rfind('/')
+            cname = cname[:cname_x]+"/preview"
+            description = description[:des_x]+"/preview"
             course = request.form['course']
             print(cduration)
             # basepath = os.path.dirname(__file__)
@@ -144,26 +148,15 @@ def data_entry_course():
             except Exception as Ex:
                 return jsonify('error')
 
-        if subject_id:
-            cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id and subject.subject_id=%s',[subject_id,])
-            course = cursor.fetchall()
-            cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id and subject.subject_id=%s and course_details.course_status="approved"',[subject_id,])
-            count[0] = len(cursor.fetchall())
-            cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id and subject.subject_id=%s and course_details.course_status="pending"',[subject_id,])
-            count[1] = len(cursor.fetchall())
-            cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id and subject.subject_id=%s and course_details.course_status="rejected"',[subject_id,])
-            count[2] = len(cursor.fetchall())
 
-
-        else:
-            cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id and course_details.course_code=%s',[cc])
-            course = cursor.fetchall()
-            cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id  and course_details.course_status="approved" and course_details.course_code=%s',[cc])
-            count[0] = len(cursor.fetchall())
-            cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id  and course_details.course_status="pending" and course_details.course_code=%s',[cc])
-            count[1] = len(cursor.fetchall())
-            cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id  and course_details.course_status="rejected"and course_details.course_code=%s',[cc])
-            count[2] = len(cursor.fetchall())
+        cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id and course_details.course_code=%s',[cc])
+        course = cursor.fetchall()
+        cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id  and course_details.course_status="approved" and course_details.course_code=%s',[cc])
+        count[0] = len(cursor.fetchall())
+        cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id  and course_details.course_status="pending" and course_details.course_code=%s',[cc])
+        count[1] = len(cursor.fetchall())
+        cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id  and course_details.course_status="rejected"and course_details.course_code=%s',[cc])
+        count[2] = len(cursor.fetchall())
 
         cursor.execute('select course_name from course_dept where course_code=%s',[cc])
         cn=cursor.fetchall()
@@ -179,9 +172,7 @@ def data_entry_course():
             # course[i]['course_description'] = html.unescape(course[i]['course_description'])
             print(course[i]['course_description'], i)
 
-        # cursor.execute('SELECT * FROM notification,admin where notification_from=admin.admin_id and notification.admin_id=%s and notification_status="unread" LIMIT 4',[id])
-        # notifi = cursor.fetchall()
-        return render_template('data_entry/course.html',course=course,subject=subject,count=count,admin_name=admin_name,course_faculty=course_code,cc=cc,cn=cn,sem=sem)
+        return render_template('data_entry/course.html',course=course,subject=subject,count=count,course_faculty=course_code,cc=cc,cn=cn,sem=sem)
     else:
         return redirect(url_for('login'))
 

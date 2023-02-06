@@ -185,7 +185,8 @@
         </button>
       </div>
       <div class="modal-body">
-          <iframe  src="https://www.codechef.com/" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <iframe  src="{{row.course_name}}" title=" video player" ></iframe>
+          <iframe src="https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview" width="640" height="480" allow="autoplay"></iframe>
 <!--<iframe src="https://www.youtube.com/watch?v=JTxsNm9IdYU" title="W3Schools Free Online Web Tutorials"></iframe>-->
       </div>
     </div>
@@ -269,7 +270,7 @@
 
                 </div>
                 <div class="modal-body">
-                    <form method="post" id="insert_form">
+                    <form method="post" id="insert_form" enctype="multipart/form-data">
                         <label>Select Unit</label>
                         <!-- <input type="text" name="sname" id="name" class="form-control" /> -->
                         <select name="subjectid" id="status" class="form-control">
@@ -291,7 +292,6 @@
                         <br />
 
                         <label  class="form-label">Enter Lecture Material Link</label>
-
                         <input type="text" name="cname" id="lm" class="form-control" />
                         <br />
 
