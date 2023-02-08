@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2023 at 07:33 PM
+-- Generation Time: Feb 08, 2023 at 11:01 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -97,7 +97,7 @@ CREATE TABLE `course_details` (
 --
 
 INSERT INTO `course_details` (`course_id`, `subject_id`, `course_description`, `course_duration`, `no_of_session`, `course_status`, `course_enroll_status`, `course_timestamp`, `admin_id`, `course_grade`, `course_name`, `l_name`, `course_code`, `nfrs`) VALUES
-(7, 3, 'https://drive.google.com/file/d/1wggpQ27JHmK7tYkvDSkx9SoFOVidDyOH/preview', 'Suggest the possible ways to organize the student details in an Institute / Organization \nHow to extract the needed information or data from the data store ?\nState the reason : Database is better choice than the file system storage\nCompare data redundancy and consistency\nHow to control concurrent access in a centralized data ?', 'https://discourse.bitsathy.ac.in/t/unit-1-constructor-and-destructor-in-c/24382', 'rejected', ' Rejected entries : Unit-3 --> LessonPlan-5 | LectureVideo-5 | DiscussionQuestion-5 | lp was not good ', '2022-11-22 06:36:53', 1, 'https://drive.google.com/file/d/1nDEEEBi-iCk3zdEAf-ZE8ibYra9YHf3b/view?usp=sharing', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview', '5', '212AM101', 30),
+(7, 3, 'https://drive.google.com/file/d/1wggpQ27JHmK7tYkvDSkx9SoFOVidDyOH/preview', 'Suggest the possible ways to organize the student details in an Institute / Organization \nHow to extract the needed information or data from the data store ?\nState the reason : Database is better choice than the file system storage\nCompare data redundancy and consistency\nHow to control concurrent access in a centralized data ?', 'https://discourse.bitsathy.ac.in/t/unit-1-constructor-and-destructor-in-c/24382', 'rejected', ' Rejected entries : Unit-3 --> LessonPlan-5 | LectureVideo-5 | DiscussionQuestion-5 | lp was not good ', '2022-11-22 06:36:53', 1, 'https://drive.google.com/file/d/1nDEEEBi-iCk3zdEAf-ZE8ibYra9YHf3b/preview', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview', '5', '212AM101', 30),
 (8, 5, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', '1. Why do you think Java is not a pure object oriented language?\n\n2. Pointers are used in C/ C++. Why does Java not make use of pointers?\n\n3. What do you understand by Object and Class?\n\n4. Compare JVM, JDK, and JRE to understand the differences.\n\n5. What do you think are the advantages of using Java?', 'https://discourse.bitsathy.ac.in/t/unit-ii-queue-and-its-operations/24391', 'rejected', ' Rejected entries : Unit-5 --> LessonPlan-2 | LectureVideo-2 | DiscourseLink-2 | lp mind map is wrong ', '2022-11-22 06:38:13', 1, 'https://drive.google.com/file/d/1nDEEEBi-iCk3zdEAf-ZE8ibYra9YHf3b/view?usp=sharing', 'https://drive.google.com/file/d/1TdbN1enPGKnFfw3mJ8ASmEqz9vYawzwB/preview', '2', '212AM306', 30),
 (9, 4, 'https://drive.google.com/file/d/1Q26vC1lPCTyHt71XcgtxBfkJ9Zlf8nze/preview', '1. Explain the role of scriplets in JSP tags?\n\n2. Did page directives can include other pages?\n\n3. Explain the importance of JSP declaration tags?', 'https://discourse.bitsathy.ac.in/t/unit-iv-minimum-spanning-tree/24399', 'rejected', ' Rejected entries : Unit-4 --> LectureVideo-3 | DiscourseLink-3 | DiscussionQuestion-3 |  ', '2022-11-22 06:39:09', 1, 'https://drive.google.com/file/d/1nDEEEBi-iCk3zdEAf-ZE8ibYra9YHf3b/view?usp=sharing', 'https://drive.google.com/file/d/1qUhuHu19_9zh-6bj_OMfiAgfDavLm_3S/preview', '3', '212AM202', 30),
 (10, 1, 'https://drive.google.com/file/d/1SLegnMoeGgUiWbklOH1m_s2DW-ywOWTj/preview', '1. Can we write only try block without catch and finally blocks?\n\n2. There are three statements in a try block – statement1, statement2 and statement3. After that there is a catch block to catch the exceptions occurred in the try block. Assume that exception has occurred in statement2. Does statement3 get executed or not?\n\n3. Does finally block get executed If either try or catch blocks are returning the control?\n\n4. Why is it always recommended to keep clean up operations like closing the DB resources inside a finally block?', 'https://discourse.bitsathy.ac.in/t/unit-ii-stack-and-its-operations/24390', 'rejected', ' Rejected entries : Unit-1 --> LectureMaterial-4 | LessonPlan-4 | LectureVideo-4 | DiscourseLink-4 | DiscussionQuestion-4 |  ', '2022-11-22 07:32:47', 1, 'https://drive.google.com/file/d/1nDEEEBi-iCk3zdEAf-ZE8ibYra9YHf3b/view?usp=sharing', 'https://drive.google.com/file/d/17SCMzfwuugUDr-RmqLjaQ-_VsXiO1bTo/preview', '4', '212AM101', 50),
@@ -106,12 +106,15 @@ INSERT INTO `course_details` (`course_id`, `subject_id`, `course_description`, `
 (16, 3, 'https://drive.google.com/file/d/1Q26vC1lPCTyHt71XcgtxBfkJ9Zlf8nze/preview', 'can we do the test of hypothesis about the difference between two means?\ncan we do the test of hypothesis about the difference between two mean with dependent samples?\nwhat is degrees of freedom.', 'https://discourse.bitsathy.ac.in/t/unit-2-topic-3-relational-model-and-database-design/20603?u=kiruthika_v_r', 'rejected', ' Rejected entries : Unit-3 --> LessonPlan-2 | DiscourseLink-2 | DiscussionQuestion-2 |  ', '2022-11-23 07:36:46', 1, 'https://drive.google.com/file/d/1nDEEEBi-iCk3zdEAf-ZE8ibYra9YHf3b/view?usp=sharing', 'https://drive.google.com/file/d/1Wxr8vC7I_pjuaGvNfeflZ6ZTXTYTELHE/preview', '2', '212AM101', 30),
 (17, 3, 'https://drive.google.com/file/d/1SLegnMoeGgUiWbklOH1m_s2DW-ywOWTj/preview', '1. How can you view the bivariat random variables in engineering fields?                \n2. Do you know any mathematical and statistical tool that allows you to view your data\'s in a different field to analyse?\n3. How can you identify the various types of bivariate random variables ?', 'https://www.google.com/', 'rejected', ' Rejected entries : Unit-3 --> LectureVideo-4 | wrongly ', '2022-11-23 08:09:05', 1, 'https://www.google.com/', 'https://drive.google.com/file/d/1Wxr8vC7I_pjuaGvNfeflZ6ZTXTYTELHE/preview', '4', '212AM101', 10),
 (18, 4, 'https://drive.google.com/file/d/1SLegnMoeGgUiWbklOH1m_s2DW-ywOWTj/preview', '1\r\n2\r\n3\r\n', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'approved', '- ', '2023-01-19 12:03:48', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1nDEEEBi-iCk3zdEAf-ZE8ibYra9YHf3b/preview', '3', '212AM306', 0),
-(19, 1, 'https://drive.google.com/file/d/1Q26vC1lPCTyHt71XcgtxBfkJ9Zlf8nze/preview', '1234', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-02 13:03:31', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/17SCMzfwuugUDr-RmqLjaQ-_VsXiO1bTo/preview', '1', '212IT101', NULL),
+(19, 1, 'https://drive.google.com/file/d/1Q26vC1lPCTyHt71XcgtxBfkJ9Zlf8nze/preview', '1234', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'approved', '-', '2023-02-02 13:03:31', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/17SCMzfwuugUDr-RmqLjaQ-_VsXiO1bTo/preview', '1', '212IT101', 0),
 (20, 1, 'https://drive.google.com/file/d/1SLegnMoeGgUiWbklOH1m_s2DW-ywOWTj/preview', '123123123', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'rejected', ' Rejected entries : Unit-1 --> LectureMaterial-1 | LessonPlan-1 | DiscourseLink-1 | DiscussionQuestion-1 |  ', '2023-02-02 13:07:37', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/17SCMzfwuugUDr-RmqLjaQ-_VsXiO1bTo/preview', '1', '212IT101', 40),
 (21, 1, 'https://drive.google.com/file/d/1Q26vC1lPCTyHt71XcgtxBfkJ9Zlf8nze/preview', '<input type=\"hidden\" name=\"c_c\" value=\"{{c_c}}\">', '<input type=\"hidden\" name=\"c_c\" value=\"{{c_c}}\">', 'pending', '-', '2023-02-02 13:20:58', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1nDEEEBi-iCk3zdEAf-ZE8ibYra9YHf3b/preview', '1', '212AM202', NULL),
 (22, 1, 'https://drive.google.com/file/d/1SLegnMoeGgUiWbklOH1m_s2DW-ywOWTj/preview', 'asdf', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-04 12:40:37', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1KJU0GgSX7xL--PxCaN4LvcC7LObp_dmC/preview', '1', '212AM306', NULL),
 (23, 5, 'https://drive.google.com/file/d/1AeUI69NjNgIXScB_oRoppRr_YRFRICVM/preview', '1234554', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-06 14:37:36', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/17SCMzfwuugUDr-RmqLjaQ-_VsXiO1bTo/preview', '1', '212AM202', NULL),
-(24, 4, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', '1.\r\n2.\r\n3.', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-06 18:28:27', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1qUhuHu19_9zh-6bj_OMfiAgfDavLm_3S/preview', '4', '212AM101', NULL);
+(24, 4, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', '1.\r\n2.\r\n3.', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-06 18:28:27', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1qUhuHu19_9zh-6bj_OMfiAgfDavLm_3S/preview', '4', '212AM101', NULL),
+(25, 5, 'https://drive.google.com/file/d/1wggpQ27JHmK7tYkvDSkx9SoFOVidDyOH/preview', 'demo time', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-08 09:43:34', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1qUhuHu19_9zh-6bj_OMfiAgfDavLm_3S/preview', '1', '212AM101', NULL),
+(26, 4, 'https://drive.google.com/file/d/1wggpQ27JHmK7tYkvDSkx9SoFOVidDyOH/preview', 'demo duplicate', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-08 09:45:30', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview', '1', '212AM101', NULL),
+(27, 2, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', 'demo time2', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-08 09:51:46', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1qUhuHu19_9zh-6bj_OMfiAgfDavLm_3S/preview', '1', '212AM101', NULL);
 
 -- --------------------------------------------------------
 
@@ -182,6 +185,19 @@ INSERT INTO `course_session_details` (`session_id`, `course_id`, `session_durati
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `deadline`
+--
+
+CREATE TABLE `deadline` (
+  `admin_id` int(50) NOT NULL,
+  `time_id` int(255) NOT NULL,
+  `deadline1` tinyint(1) DEFAULT 0,
+  `deadline2` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `department`
 --
 
@@ -237,7 +253,7 @@ CREATE TABLE `faculty_details` (
 
 INSERT INTO `faculty_details` (`faculty_id`, `faculty_name`, `faculty_email`, `faculty_contact`, `faculty_timestamp`, `nfrs`) VALUES
 (1, 'anooshkavin', 'anooshkavin@gmail.com', '9562513517', '2021-05-27 05:54:05', 0),
-(4, 'kishore', 'kishoredurai7@gmail.com', '9787688154', '2021-06-02 04:29:48', 230),
+(4, 'kishore', 'kishoredurai7@gmail.com', '9787688154', '2021-06-02 04:29:48', 250),
 (5, 'sad', 'asdasd@kflg.com', '97876881544', '2021-06-03 10:52:25', 0);
 
 -- --------------------------------------------------------
@@ -359,6 +375,30 @@ INSERT INTO `subject` (`subject_id`, `subject_name`, `subject_description`) VALU
 (4, 'U4', NULL),
 (5, 'U5', NULL);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `time_table`
+--
+
+CREATE TABLE `time_table` (
+  `time_id` int(255) NOT NULL,
+  `admin_id` int(50) NOT NULL,
+  `course_code` varchar(100) NOT NULL,
+  `unit` int(10) NOT NULL,
+  `lp_no` int(10) NOT NULL,
+  `wiki_upload_time` timestamp NULL DEFAULT NULL,
+  `uploaded_time` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `time_table`
+--
+
+INSERT INTO `time_table` (`time_id`, `admin_id`, `course_code`, `unit`, `lp_no`, `wiki_upload_time`, `uploaded_time`) VALUES
+(1, 1, '212AM101', 2, 1, '2023-02-19 18:30:00', '2023-02-08 09:51:46'),
+(2, 1, '212AD101', 2, 3, '2023-02-19 18:30:00', NULL);
+
 --
 -- Indexes for dumped tables
 --
@@ -450,6 +490,12 @@ ALTER TABLE `subject`
   ADD UNIQUE KEY `Department` (`subject_id`);
 
 --
+-- Indexes for table `time_table`
+--
+ALTER TABLE `time_table`
+  ADD PRIMARY KEY (`time_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -469,7 +515,7 @@ ALTER TABLE `course_dept`
 -- AUTO_INCREMENT for table `course_details`
 --
 ALTER TABLE `course_details`
-  MODIFY `course_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `course_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `course_enroll_details`
@@ -530,6 +576,12 @@ ALTER TABLE `student_details`
 --
 ALTER TABLE `subject`
   MODIFY `subject_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `time_table`
+--
+ALTER TABLE `time_table`
+  MODIFY `time_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

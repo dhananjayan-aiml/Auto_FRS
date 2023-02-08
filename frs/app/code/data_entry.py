@@ -114,9 +114,21 @@ def data_entry_course():
         course_faculty = cursor.fetchall()
         course_code =[]
         cc=request.args.get('a')
+
         for i in course_faculty:
             course_code.append(i['course_code'])
-        if request.method == 'POST':      
+        if request.method == 'POST':
+            # CODE FOR DEADLINES
+            unit_no = request.form['subjectid']
+            lp_no = request.form['ln']
+            cursor.execute('select time_id,admin_id from time_table where unit=%s and lp_no =%s and uploaded_time is NULL',
+                           [unit_no, lp_no])
+            time_table = cursor.fetchall()
+            if len(time_table)>0:
+                time_id=time_table[0]['time_id']
+                cursor.execute('update time_table set uploaded_time=CURRENT_TIMESTAMP where time_id=%s',[time_id])
+            print(time_table)
+
             # adminid=session.get('id')
             subjectid = request.form['subjectid']
             cname = request.form['cname']
@@ -141,10 +153,12 @@ def data_entry_course():
             # file.save(os.path.join(app.root_path, f'static/uploads/pdf/{subjectid}-{grade}.{extension}'))
             # student_id = "uploads/pdf/{0}-{1}.pdf".format(subjectid, grade)
             try:
-                print(course)
-                cursor.execute("INSERT INTO course_details (subject_id, course_grade,course_name,course_description,course_duration,no_of_session,l_name,admin_id,course_code) VALUES (%s, %s, %s, %s, %s, %s,%s,%s,%s)",[subjectid, grade,cname,description,cduration,nosession,ln,id,course,])
-                mysql.connection.commit()
-                return jsonify('success')
+                if len(time_table)>0:
+                    cursor.execute("INSERT INTO course_details (subject_id, course_grade,course_name,course_description,course_duration,no_of_session,l_name,admin_id,course_code) VALUES (%s, %s, %s, %s, %s, %s,%s,%s,%s)",[subjectid, grade,cname,description,cduration,nosession,ln,id,course,])
+                    mysql.connection.commit()
+                    return jsonify('success')
+                else:
+                    return jsonify('error')
             except Exception as Ex:
                 return jsonify('error')
 
