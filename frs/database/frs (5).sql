@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 08, 2023 at 11:01 AM
+-- Generation Time: Feb 09, 2023 at 11:52 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -114,7 +114,17 @@ INSERT INTO `course_details` (`course_id`, `subject_id`, `course_description`, `
 (24, 4, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', '1.\r\n2.\r\n3.', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-06 18:28:27', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1qUhuHu19_9zh-6bj_OMfiAgfDavLm_3S/preview', '4', '212AM101', NULL),
 (25, 5, 'https://drive.google.com/file/d/1wggpQ27JHmK7tYkvDSkx9SoFOVidDyOH/preview', 'demo time', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-08 09:43:34', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1qUhuHu19_9zh-6bj_OMfiAgfDavLm_3S/preview', '1', '212AM101', NULL),
 (26, 4, 'https://drive.google.com/file/d/1wggpQ27JHmK7tYkvDSkx9SoFOVidDyOH/preview', 'demo duplicate', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-08 09:45:30', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview', '1', '212AM101', NULL),
-(27, 2, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', 'demo time2', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-08 09:51:46', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1qUhuHu19_9zh-6bj_OMfiAgfDavLm_3S/preview', '1', '212AM101', NULL);
+(27, 2, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', 'demo time2', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-08 09:51:46', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1qUhuHu19_9zh-6bj_OMfiAgfDavLm_3S/preview', '1', '212AM101', NULL),
+(28, 2, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', '234', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-08 17:33:42', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview', '3', '212AM101', NULL),
+(29, 2, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', 'w2erdf', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-08 17:49:51', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview', '3', '212AM202', NULL),
+(30, 3, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', 'q23r', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-08 17:55:15', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview', '3', '212AM202', NULL),
+(31, 4, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', 'awefd', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-08 18:06:39', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview', '3', '212AM202', NULL),
+(32, 4, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', 'awefd', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-08 18:10:25', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview', '3', '212AM202', NULL),
+(33, 4, 'https://drive.google.com/file/d/1wggpQ27JHmK7tYkvDSkx9SoFOVidDyOH/preview', 'ASDFA ', '<input type=\"hidden\" name=\"c_c\" value=\"{{c_c}}\">', 'pending', '-', '2023-02-08 18:18:08', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview', '4', '212AM202', NULL),
+(34, 5, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', 'qgr', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-09 03:25:58', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview', '5', '212AM101', NULL),
+(35, 5, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', 'sdaf', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-09 03:28:08', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview', '5', '212AM101', NULL),
+(36, 5, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', 'wdtgh ', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-09 04:02:31', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview', '5', '212AM101', NULL),
+(37, 5, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', 'asdfasdf', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-09 04:22:08', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview', '5', '212AM101', NULL);
 
 -- --------------------------------------------------------
 
@@ -191,9 +201,17 @@ INSERT INTO `course_session_details` (`session_id`, `course_id`, `session_durati
 CREATE TABLE `deadline` (
   `admin_id` int(50) NOT NULL,
   `time_id` int(255) NOT NULL,
-  `deadline1` tinyint(1) DEFAULT 0,
-  `deadline2` tinyint(1) DEFAULT 0
+  `deadline1_date` timestamp NULL DEFAULT NULL,
+  `deadline2_date` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `deadline`
+--
+
+INSERT INTO `deadline` (`admin_id`, `time_id`, `deadline1_date`, `deadline2_date`) VALUES
+(1, 1, NULL, NULL),
+(1, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -388,16 +406,20 @@ CREATE TABLE `time_table` (
   `unit` int(10) NOT NULL,
   `lp_no` int(10) NOT NULL,
   `wiki_upload_time` timestamp NULL DEFAULT NULL,
-  `uploaded_time` timestamp NULL DEFAULT NULL
+  `uploaded_time` timestamp NULL DEFAULT NULL,
+  `deadline` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `time_table`
 --
 
-INSERT INTO `time_table` (`time_id`, `admin_id`, `course_code`, `unit`, `lp_no`, `wiki_upload_time`, `uploaded_time`) VALUES
-(1, 1, '212AM101', 2, 1, '2023-02-19 18:30:00', '2023-02-08 09:51:46'),
-(2, 1, '212AD101', 2, 3, '2023-02-19 18:30:00', NULL);
+INSERT INTO `time_table` (`time_id`, `admin_id`, `course_code`, `unit`, `lp_no`, `wiki_upload_time`, `uploaded_time`, `deadline`) VALUES
+(1, 1, '212AM101', 2, 1, '2023-02-19 18:30:00', '2023-02-08 09:51:46', 0),
+(2, 1, '212AM202', 4, 4, '2023-02-09 18:30:00', '2023-02-08 18:18:08', 0),
+(3, 1, '212AM101', 5, 5, '2023-02-14 18:30:00', '2023-02-09 04:22:08', 1),
+(4, 1, '212IT101', 2, 2, '2023-02-23 05:52:04', NULL, 0),
+(5, 1, '212AM306', 3, 3, '2023-02-23 05:52:04', NULL, 0);
 
 --
 -- Indexes for dumped tables
@@ -515,7 +537,7 @@ ALTER TABLE `course_dept`
 -- AUTO_INCREMENT for table `course_details`
 --
 ALTER TABLE `course_details`
-  MODIFY `course_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `course_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `course_enroll_details`
@@ -581,7 +603,7 @@ ALTER TABLE `subject`
 -- AUTO_INCREMENT for table `time_table`
 --
 ALTER TABLE `time_table`
-  MODIFY `time_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `time_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

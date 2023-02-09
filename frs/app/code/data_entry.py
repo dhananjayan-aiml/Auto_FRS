@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 # -*- coding: utf-8 -*-
-
+from datetime import timedelta, datetime
 from re import sub
 import html
 from MySQLdb.cursors import Cursor
@@ -9,14 +9,13 @@ from app import *
 def data_entry_home():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     if 'id' in session and session.get("user_type") == 'data_entry':
-        id=session.get('id')      
+        id=session.get('id')
 
         home = arr.array('i', [0, 0, 0, 0])
-
         admin_name=session.get('name')
         cursor.execute('SELECT * FROM course_details')
         home[0] = len(cursor.fetchall())
-      
+
         cursor.execute('SELECT * FROM course_details where course_status="approved"')
         home[1] = len(cursor.fetchall())
         cursor.execute('SELECT nfrs FROM faculty_details where faculty_id=4')
@@ -28,9 +27,18 @@ def data_entry_home():
         cursor.execute('SELECT course_code from course_faculty')
         course_faculty = cursor.fetchall()
         course_code = []
+        cursor.execute('select * from time_table where admin_id=%s and ((uploaded_time is NULL) or (deadline !=0))',[id])
+        upcoming_deadline = cursor.fetchall()
+
+        cursor.execute('SELECT count(*) as count,course_code,course_status  FROM course_details Where  course_status="approved" and admin_id=%s group by course_code ',[id])
+        approved =cursor.fetchall()
+        cursor.execute('SELECT count(*) as count ,course_code,course_status FROM course_details Where  course_status="rejected" and admin_id=%s group by course_code',[id])
+        rejected = cursor.fetchall()
+        cursor.execute('SELECT count(*) as count ,course_code,course_status FROM course_details Where  course_status="pending" and admin_id=%s group by course_code',[id])
+        pending =cursor.fetchall()
         for i in course_faculty:
-            course_code.append(i['course_code'])
-        return render_template('data_entry/index.html',admin_name=admin_name,count=home,course_faculty=course_code)
+            course_code.append(str(i['course_code']))
+        return render_template('data_entry/index.html',admin_name=admin_name,count=home,course_faculty=course_code,cc=course_faculty,upcoming_deadline=upcoming_deadline,approved=approved,rejected=rejected,pending=pending)
     else:
         return redirect(url_for('login'))
 
@@ -44,11 +52,11 @@ def data_entry_home():
 def data_entry_subject():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     if 'id' in session and session.get("user_type") == 'data_entry':
-        id=session.get('id')  
+        id=session.get('id')
         admin_name=session.get('name')
         if request.method == 'POST':
             name = request.form['name']
-            description = request.form['descr']                   
+            description = request.form['descr']
             try:
                 cursor.execute("INSERT INTO subject (subject_name, subject_description) VALUES (%s, %s)",[name, description])
                 cursor.execute("INSERT INTO subject (subject_name, subject_description) VALUES (%s, %s)",[name, description])
@@ -56,7 +64,7 @@ def data_entry_subject():
                 return jsonify('success')
             except Exception as Ex:
                 return jsonify('error')
-        
+
         cursor.execute('SELECT * FROM subject')
         subject = cursor.fetchall()
         # cursor.execute('SELECT * FROM notification,admin where notification_from=admin.admin_id and notification.admin_id=%s and notification_status="unread" LIMIT 4',[id])
@@ -66,11 +74,11 @@ def data_entry_subject():
         return redirect(url_for('login'))
 
 @app.route('/data_entry/subject/select', methods=['GET', 'POST'])
-def admin_adminuser_select():   
+def admin_adminuser_select():
     cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    if request.method == 'POST': 
+    if request.method == 'POST':
         subject = request.form['subject']
-        print(subject)      
+        print(subject)
         cur.execute("SELECT * FROM subject WHERE subject_id = %s", [subject])
         rsemployee = cur.fetchall()
         employeearray = []
@@ -90,10 +98,10 @@ def data_entry_subject_update():
     if request.method == "POST":
         subject_id = request.form['subject_id']
         subject_name = request.form['subject_name']
-        subject_description = request.form['subject_description']    
+        subject_description = request.form['subject_description']
         cursor.execute('update subject set subject_name=%s, subject_description = %s where subject_id=%s', [subject_name,subject_description,subject_id])
         mysql.connection.commit()
-    return jsonify('success')   
+    return jsonify('success')
 
 ####################################### subject table end ############################################
 
@@ -104,7 +112,7 @@ def data_entry_subject_update():
 @app.route("/data_entry/course", methods=["POST", "GET"])
 def data_entry_course():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    if 'id' in session and session.get("user_type") == 'data_entry':  
+    if 'id' in session and session.get("user_type") == 'data_entry':
         id=session.get('id')
         count = arr.array('i', [0, 0, 0])
         # admin_name=session.get('name')
@@ -121,13 +129,28 @@ def data_entry_course():
             # CODE FOR DEADLINES
             unit_no = request.form['subjectid']
             lp_no = request.form['ln']
-            cursor.execute('select time_id,admin_id from time_table where unit=%s and lp_no =%s and uploaded_time is NULL',
-                           [unit_no, lp_no])
+            course = request.form['course']
+            print(course)
+            cursor.execute('select time_id,admin_id,wiki_upload_time from time_table where unit=%s and lp_no =%s and course_code=%s and ((uploaded_time is NULL) or (deadline !=0))',
+                           [unit_no, lp_no,course])
             time_table = cursor.fetchall()
-            if len(time_table)>0:
-                time_id=time_table[0]['time_id']
-                cursor.execute('update time_table set uploaded_time=CURRENT_TIMESTAMP where time_id=%s',[time_id])
-            print(time_table)
+            cursor.execute('select course_status from course_details where admin_id=%s and l_name=%s and subject_id=%s and course_code=%s',[id,lp_no,unit_no,course])
+            status=cursor.fetchall()
+            print(time_table,status)
+            current_time=datetime.strptime(datetime.now().strftime("%Y-%m-%d %H:%M:%S"),"%Y-%m-%d %H:%M:%S")
+
+            if len(time_table)>0 and status:
+                wiki_deadline=datetime.strptime(str(time_table[0]['wiki_upload_time']),"%Y-%m-%d %H:%M:%S")
+                print(wiki_deadline,type(wiki_deadline),wiki_deadline+ timedelta(days=-10, hours=0),current_time,(wiki_deadline + timedelta(days=-10, hours=0)) > current_time)
+                if (wiki_deadline + timedelta(days=-10, hours=0)) >= current_time:#within first deadline
+                    time_id=time_table[0]['time_id']
+                    cursor.execute('update time_table set uploaded_time=CURRENT_TIMESTAMP where time_id=%s',[time_id])
+                elif (wiki_deadline+timedelta(days=-5, hours=0))< current_time:#after second deadline
+                    print("intimate head academics")
+                elif (wiki_deadline + timedelta(days=-10, hours=0)) < current_time:#between first and second deadline
+                    time_id = time_table[0]['time_id']
+                    cursor.execute('update time_table set uploaded_time=CURRENT_TIMESTAMP,deadline=1 where time_id=%s', [time_id])
+                    cursor.execute('update deadline set deadline1_date=CURRENT_TIMESTAMP where time_id=%s', [time_id])
 
             # adminid=session.get('id')
             subjectid = request.form['subjectid']
@@ -144,8 +167,7 @@ def data_entry_course():
             des_x = description.rfind('/')
             cname = cname[:cname_x]+"/preview"
             description = description[:des_x]+"/preview"
-            course = request.form['course']
-            print(cduration)
+
             # basepath = os.path.dirname(__file__)
             # file_path = os.path.join(basepath, secure_filename(file.filename))
 
@@ -158,7 +180,7 @@ def data_entry_course():
                     mysql.connection.commit()
                     return jsonify('success')
                 else:
-                    return jsonify('error')
+                    return jsonify('error_duplicate')
             except Exception as Ex:
                 return jsonify('error')
 
@@ -180,7 +202,6 @@ def data_entry_course():
 
         sem = cc[5]
 
-        # admin_id=course[0]['admin_id']
 
         for i in range(len(course)):
             # course[i]['course_description'] = html.unescape(course[i]['course_description'])
@@ -195,23 +216,23 @@ def data_entry_course():
 @app.route("/data_entry/course/update", methods=["POST", "GET"])
 def data_entry_course_update():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    if 'id' in session and session.get("user_type") == 'data_entry':     
+    if 'id' in session and session.get("user_type") == 'data_entry':
         if request.method == "POST":
 
             if request.form.get("delete"):
-                result = request.form 
+                result = request.form
                 id = result["delete"]
                 cursor.execute('delete from course_details where course_id=%s;', [id])
                 mysql.connection.commit()
-                flash("Deleted")                
+                flash("Deleted")
                 return redirect(url_for('data_entry_course'))
     else:
         return redirect(url_for('login'))
 
 @app.route('/data_entry/course/select', methods=['GET', 'POST'])
-def data_entry_course_select():   
+def data_entry_course_select():
     cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    if request.method == 'POST': 
+    if request.method == 'POST':
         course_id = request.form['course_id']
         cur.execute("SELECT * FROM course_details,subject WHERE course_details.subject_id=subject.subject_id and course_id = %s", [course_id])
         rsemployee = cur.fetchall()
@@ -233,7 +254,7 @@ def data_entry_course_select():
 @app.route("/data_entry/course/change", methods=["POST", "GET"])
 def data_entry_course_change():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    if request.method == "POST":        
+    if request.method == "POST":
         course_id = request.form['course_id']
         course_name = request.form['course_name']
         course_duration = request.form['course_duration']
@@ -242,7 +263,7 @@ def data_entry_course_change():
         course_description = request.form['test']
         cursor.execute('update course_details set course_name=%s, course_duration = %s ,no_of_session=%s , course_status=%s ,course_description=%s where course_id=%s', [course_name,course_duration,no_of_session,status,course_description,course_id])
         mysql.connection.commit()
-    return jsonify('success')   
+    return jsonify('success')
 
 
 ####################################### Course table end ############################################
@@ -256,11 +277,11 @@ def data_entry_course_change():
 @app.route("/data_entry/course/registered", methods=["POST", "GET"])
 def data_entry_course_registered():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    if 'id' in session and session.get("user_type") == 'data_entry':  
+    if 'id' in session and session.get("user_type") == 'data_entry':
         id=session.get('id')
         count = arr.array('i', [0, 0, 0])
         admin_name=session.get('name')
-        subject_id = request.args.get('course_id')  
+        subject_id = request.args.get('course_id')
         # if request.method == 'POST':      
         #     adminid=session.get('id')
         #     subjectid = request.form['subjectid']
@@ -280,21 +301,21 @@ def data_entry_course_registered():
             cursor.execute('SELECT * FROM course_enroll_details,student_details Where course_enroll_details.student_id=student_details.student_id and course_enroll_details.course_id=%s',[subject_id,])
             course = cursor.fetchall()
             cursor.execute('SELECT * FROM course_enroll_details,student_details Where course_enroll_details.student_id=student_details.student_id and course_enroll_details.course_id=%s',[subject_id,])
-            count[0] = len(cursor.fetchall())      
+            count[0] = len(cursor.fetchall())
             # cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id and subject.subject_id=%s and course_details.course_status="open"',[subject_id,])
             # count[1] = len(cursor.fetchall())
             # cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id and subject.subject_id=%s and course_details.course_status="close"',[subject_id,])
             # count[2] = len(cursor.fetchall())
-       
-            
+
+
         else:
             cursor.execute('SELECT * FROM school_management.course_details,school_management.course_enroll_details,school_management.student_details Where course_details.course_id=course_enroll_details.course_id and course_enroll_details.student_id=student_details.student_id')
             course = cursor.fetchall()
             print(course)
             cursor.execute('SELECT * FROM course_details,subject Where course_details.subject_id=subject.subject_id')
             count[0] = len(cursor.fetchall())
-          
-            
+
+
         cursor.execute('SELECT * FROM subject')
         subject = cursor.fetchall()
         cursor.execute('SELECT * FROM notification,admin where notification_from=admin.admin_id and notification.admin_id=%s and notification_status="unread" LIMIT 4',[id])
@@ -314,20 +335,20 @@ def data_entry_course_registered():
 @app.route("/data_entry/course/registerd/student_mail", methods=["POST", "GET"])
 def data_entry_course_registered_student_mail():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    if 'id' in session and session.get("user_type") == 'data_entry': 
+    if 'id' in session and session.get("user_type") == 'data_entry':
 
         if request.method == "POST" and 'id_stu' in request.form:
             studentid = request.form['id_stu']
             print(studentid)
             subject = request.form['subject']
-            
+
 
             message = request.form['test']
             cursor.execute('select * from student_details where student_id =%s',[studentid])
             student = cursor.fetchone()
-            
+
             a=email(student['student_email'],subject,message)
-                            
+
             return jsonify('success')
         elif request.method == "POST" and 'course_id' in request.form:
             courseid = request.form['course_id']
@@ -363,25 +384,25 @@ def data_entry_course_registered_student_mail():
        # result = cursor.fetchall()
        # output = io.StringIO()
        # writer = csv.writer(output)
-            
+
        # line = ['Emp Id, Emp First Name, Emp Last Name, Emp Designation']
        # writer.writerow(line)
        # for row in result:
           #  line = [str(row['student_id']) + ',' + row['student_name'] + ',' + row['student_name'] + ',' + row['student_email']]
           #  writer.writerow(line)
         #output.seek(0)
-		
+
        # return Response(output, mimetype="text/csv", headers={"Content-Disposition":"attachment;filename=employee_report.csv"})
    	# except Exception as e:
     #     print(e)
-    
-        # try:            
+
+        # try:
         #     cursor.execute("SELECT * FROM course_enroll_details,student_details Where course_enroll_details.student_id=student_details.student_id and course_enroll_details.course_id=%s",[subject_id])
         #     result = cursor.fetchall()
 
         #     output = io.StringIO()
         #     writer = csv.writer(output)
-            
+
         #     line = ['Emp Id, Emp First Name, Emp Last Name, Emp Designation']
         #     writer.writerow(line)
 
@@ -390,11 +411,11 @@ def data_entry_course_registered_student_mail():
         #         writer.writerow(line)
 
         #     output.seek(0)
-            
+
         #     return Response(output, mimetype="text/csv", headers={"Content-Disposition":"attachment;filename=employee_report.csv"})
 	    # except Exception as e:
 		#     print(e)
-    
+
 
 # @app.route('/data_entry/course/select', methods=['GET', 'POST'])
 # def data_entry_course_select():   
@@ -451,9 +472,9 @@ def data_entry_session():
         count = arr.array('i', [0, 0, 0])
         id=session.get('id')
         admin_name=session.get('name')
-        session_ids = request.args.get('session_id')  
+        session_ids = request.args.get('session_id')
         print(session_ids)
-        if request.method == 'POST':      
+        if request.method == 'POST':
             # adminid=session.get('id')
             cname = request.form['cname']
             sduration = request.form['sduration']
@@ -462,16 +483,16 @@ def data_entry_session():
             print(desc,"******")
             sdate = request.form['sdate']
             stime = request.form['stime']
-            etime = request.form['etime']          
-            fid = request.form['fid']    
-                           
+            etime = request.form['etime']
+            fid = request.form['fid']
+
             try:
                 cursor.execute("INSERT INTO course_session_details (course_id, session_duration ,faculty_id,session_name,session_discription,session_date,session_starttime,session_endtime) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",[cname,sduration,fid,sname,desc,sdate,stime,etime])
                 mysql.connection.commit()
                 last_id = cursor.lastrowid
                 print(last_id)
                 cursor.execute('INSERT INTO session_content (session_id) values(%s)',[last_id,])
-                mysql.connection.commit()                
+                mysql.connection.commit()
                 cursor.execute('INSERT INTO student_attendance (session_id,student_id) SELECT %s,student_id FROM course_enroll_details where course_id=%s'% (last_id,cname))
                 mysql.connection.commit()
                 return jsonify('success')
@@ -482,17 +503,17 @@ def data_entry_session():
             cursor.execute('SELECT * FROM course_session_details,faculty_details,course_details,session_content WHERE course_session_details.session_id=session_content.session_id and course_session_details.faculty_id=faculty_details.faculty_id and course_details.course_id=course_session_details.course_id and course_details.course_id=%s',[session_ids,])
             sess = cursor.fetchall()
             cursor.execute('SELECT * FROM course_session_details,course_details where course_details.course_id=course_session_details.course_id and course_details.course_id=%s',[session_ids,])
-            count[0] = len(cursor.fetchall())      
+            count[0] = len(cursor.fetchall())
             cursor.execute('SELECT * FROM course_session_details,course_details where course_details.course_id=course_session_details.course_id and course_details.course_id=%s and course_session_details.session_status="open"',[session_ids,])
             count[1] = len(cursor.fetchall())
             cursor.execute('SELECT * FROM course_session_details,course_details where course_details.course_id=course_session_details.course_id and course_details.course_id=%s and course_session_details.session_status="close"',[session_ids,])
             count[2] = len(cursor.fetchall())
-       
+
         else:
             cursor.execute('SELECT * FROM course_session_details,faculty_details,course_details,session_content WHERE course_session_details.session_id=session_content.session_id and course_session_details.faculty_id=faculty_details.faculty_id and course_details.course_id=course_session_details.course_id')
             sess = cursor.fetchall()
             cursor.execute('SELECT * FROM course_session_details,course_details where course_details.course_id=course_session_details.course_id')
-            count[0] = len(cursor.fetchall())      
+            count[0] = len(cursor.fetchall())
             cursor.execute('SELECT * FROM course_session_details,course_details where course_details.course_id=course_session_details.course_id and course_session_details.session_status="open"')
             count[1] = len(cursor.fetchall())
             cursor.execute('SELECT * FROM course_session_details,course_details where course_details.course_id=course_session_details.course_id and course_session_details.session_status="close"')
@@ -501,7 +522,7 @@ def data_entry_session():
         course = cursor.fetchall()
         cursor.execute('SELECT * FROM faculty_details')
         faculty = cursor.fetchall()
-    
+
         for i in range(len(sess)):
             # print(sess)
             # sess[i]['session_discription'] = html.unescape(sess[i]['session_discription'])
@@ -515,15 +536,15 @@ def data_entry_session():
 @app.route("/data_entry/session/update", methods=["POST", "GET"])
 def data_entry_session_update():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    if 'id' in session and session.get("user_type") == 'data_entry':     
-        
+    if 'id' in session and session.get("user_type") == 'data_entry':
+
         if request.method == "POST":
             if request.form.get("delete"):
-                result = request.form 
+                result = request.form
                 id = result["delete"]
                 cursor.execute('delete from course_session_details where session_id=%s;', [id])
                 mysql.connection.commit()
-                flash("Deleted")                                         
+                flash("Deleted")
                 return redirect(url_for('data_entry_session'))
     else:
         return redirect(url_for('login'))
@@ -531,11 +552,11 @@ def data_entry_session_update():
 
 
 @app.route('/data_entry/session/video/select', methods=['GET', 'POST'])
-def data_entry_session_video_select():   
+def data_entry_session_video_select():
     cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    if request.method == 'POST': 
+    if request.method == 'POST':
         sessio_id = request.form['sessio_id1']
-        print(sessio_id)      
+        print(sessio_id)
         cur.execute("SELECT sc.*,csd.*,cd.* from course_details cd left join course_session_details csd on cd.course_id = csd.course_id left join session_content sc on sc.session_id = csd.session_id where csd.session_id =  %s", [sessio_id])
         rsemployee = cur.fetchall()
         employeearray = []
@@ -560,7 +581,7 @@ def data_entry_session_video_select():
 @app.route("/data_entry/session/video/change", methods=["POST", "GET"])
 def data_entry_session_video_change():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    if request.method == "POST":        
+    if request.method == "POST":
         session_id = request.form['session_id1']
         print("session"+ session_id)
         # session_name = request.form['session_name1']
@@ -573,18 +594,18 @@ def data_entry_session_video_change():
         # print(session_discription)
         cursor.execute('update session_content set video_content=%s, material_content = %s ,content_descritpion=%s , online_mode=%s ,online_link=%s  where session_id=%s', [video_content,material_content,content_descritpion,online_mode,online_link,session_id])
         mysql.connection.commit()
-    return jsonify('success')   
+    return jsonify('success')
 
 
 
 
 
 @app.route('/data_entry/session/select', methods=['GET', 'POST'])
-def data_entry_session_select():   
+def data_entry_session_select():
     cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    if request.method == 'POST': 
+    if request.method == 'POST':
         sessio_id = request.form['sessio_id']
-        print(sessio_id)      
+        print(sessio_id)
         cur.execute("SELECT * FROM course_session_details,faculty_details,course_details WHERE course_session_details.faculty_id=faculty_details.faculty_id and course_details.course_id=course_session_details.course_id and session_id = %s", [sessio_id])
         rsemployee = cur.fetchall()
         for i in range(len(rsemployee)):
@@ -612,7 +633,7 @@ def data_entry_session_select():
 @app.route("/data_entry/session/change", methods=["POST", "GET"])
 def data_entry_session_change():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    if request.method == "POST":        
+    if request.method == "POST":
         session_id = request.form['session_id']
         print("session"+ session_id)
         session_name = request.form['session_name']
@@ -624,7 +645,7 @@ def data_entry_session_change():
         print(session_discription)
         cursor.execute('update course_session_details set session_name=%s, session_date = %s ,session_starttime=%s , session_endtime=%s ,session_status=%s ,session_discription = %s where session_id=%s', [session_name,session_date,session_starttime,session_endtime,session_status,session_discription,session_id])
         mysql.connection.commit()
-    return jsonify('success')   
+    return jsonify('success')
 
 
 
@@ -646,22 +667,22 @@ def data_entry_attendance():
     if 'id' in session and session.get("user_type") == 'data_entry':
         id=session.get('id')
         admin_name=session.get('name')
-        session_ids = request.args.get('session_id')  
-        session_name = request.args.get('session_name')  
+        session_ids = request.args.get('session_id')
+        session_name = request.args.get('session_name')
 
         print(session_name)
         if session_ids:
             cursor.execute('select distinct sa.*,sd.*,ssf.* from student_attendance sa left join student_details sd on sd.student_id = sa.student_id left join student_session_feedback ssf on ssf.student_id = sa.student_id where sa.session_id =%s',[session_ids,])
             attendance = cursor.fetchall()
-            
+
             cursor.execute('SELECT * FROM student_attendance,student_details WHERE student_attendance.student_id=student_details.student_id and student_attendance.session_id=%s',[session_ids,])
-            count[0] = len(cursor.fetchall())      
+            count[0] = len(cursor.fetchall())
             cursor.execute('SELECT * FROM student_attendance,student_details WHERE student_attendance.student_id=student_details.student_id and student_attendance.session_id=%s and student_attendance.satt_present="YES"',[session_ids,])
             count[1] = len(cursor.fetchall())
             cursor.execute('SELECT * FROM student_attendance,student_details WHERE student_attendance.student_id=student_details.student_id and student_attendance.session_id=%s and student_attendance.satt_present="NO"',[session_ids,])
             count[2] = len(cursor.fetchall())
         else:
-            return redirect(url_for('login'))  
+            return redirect(url_for('login'))
 
         cursor.execute('SELECT * FROM notification,admin where notification_from=admin.admin_id and notification.admin_id=%s and notification_status="unread" LIMIT 4',[id])
         notifi = cursor.fetchall()
@@ -683,17 +704,17 @@ def data_entry_faculty():
     if 'id' in session and session.get("user_type") == 'data_entry':
         id=session.get('id')
         admin_name=session.get('name')
-        if request.method == 'POST':      
+        if request.method == 'POST':
             adminid=session.get('id')
             fname = request.form['fname']
             email = request.form['email']
-            contact = request.form['contact']              
+            contact = request.form['contact']
             try:
                 cursor.execute("INSERT INTO faculty_details (faculty_name, faculty_email ,faculty_contact) VALUES (%s, %s, %s)",[fname,email,contact])
                 mysql.connection.commit()
                 return jsonify('success')
             except Exception as Ex:
-                return jsonify('error')
+                return jsonify('swal-modal')
         cursor.execute('SELECT * FROM faculty_details')
         faculty = cursor.fetchall()
         cursor.execute('SELECT * FROM notification,admin where notification_from=admin.admin_id and notification.admin_id=%s and notification_status="unread" LIMIT 4',[id])
@@ -706,14 +727,14 @@ def data_entry_faculty():
 @app.route("/data_entry/faculty/update", methods=["POST", "GET"])
 def data_entry_faculty_update():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    if 'id' in session and session.get("user_type") == 'data_entry':     
+    if 'id' in session and session.get("user_type") == 'data_entry':
         if request.method == "POST":
             if request.form.get("delete"):
-                result = request.form 
+                result = request.form
                 id = result["delete"]
                 cursor.execute('delete from faculty_details where faculty_id=%s;', [id])
                 mysql.connection.commit()
-                flash("Deleted")                                         
+                flash("Deleted")
                 return redirect(url_for('data_entry_faculty'))
     else:
         return redirect(url_for('login'))
@@ -722,11 +743,11 @@ def data_entry_faculty_update():
 
 
 @app.route('/data_entry/faculty/select', methods=['GET', 'POST'])
-def data_entry_faculty_select():   
+def data_entry_faculty_select():
     cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    if request.method == 'POST': 
+    if request.method == 'POST':
         faculty_id = request.form['faculty_id']
-        print(faculty_id)      
+        print(faculty_id)
         cur.execute("SELECT * FROM faculty_details where faculty_id = %s", [faculty_id])
         rsemployee = cur.fetchall()
         employeearray = []
@@ -742,7 +763,7 @@ def data_entry_faculty_select():
 @app.route("/data_entry/faculty/change", methods=["POST", "GET"])
 def data_entry_faculty_change():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    if request.method == "POST":        
+    if request.method == "POST":
         faculty_id = request.form['faculty_id']
         print("faculty_id"+ faculty_id)
         faculty_name = request.form['faculty_name']
@@ -751,7 +772,7 @@ def data_entry_faculty_change():
 
         cursor.execute('update faculty_details set faculty_name=%s, faculty_email = %s ,faculty_contact=%s where faculty_id=%s', [faculty_name,faculty_email,faculty_contact,faculty_id])
         mysql.connection.commit()
-    return jsonify('success')   
+    return jsonify('success')
 
 
 
@@ -771,8 +792,8 @@ def data_entry_student():
     if 'id' in session and session.get("user_type") == 'data_entry':
         id=session.get('id')
         count = arr.array('i', [0, 0, 0, 0])
-        school_id = request.args.get('school_id')  
-        status = request.args.get('status')  
+        school_id = request.args.get('school_id')
+        status = request.args.get('status')
 
         admin_name=session.get('name')
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
@@ -780,8 +801,8 @@ def data_entry_student():
             cursor.execute('SELECT * FROM student_details,school_details where school_details.school_id=student_details.school_id and student_details.school_id=%s',[school_id,])
             student = cursor.fetchall()
             cursor.execute('SELECT * FROM student_details,school_details where school_details.school_id=student_details.school_id and student_details.school_id=%s',[school_id,])
-            count[0] = len(cursor.fetchall())  
-    
+            count[0] = len(cursor.fetchall())
+
             cursor.execute('SELECT * FROM student_details,school_details where school_details.school_id=student_details.school_id and student_details.school_id=%s and student_details.account_status="allow"',[school_id,])
             count[1] = len(cursor.fetchall())
             cursor.execute('SELECT * FROM student_details,school_details where school_details.school_id=student_details.school_id and student_details.school_id=%s and student_details.account_status="block"',[school_id,])
@@ -792,7 +813,7 @@ def data_entry_student():
             cursor.execute('SELECT * FROM student_details,school_details where school_details.school_id=student_details.school_id and student_details.account_status="waiting"')
             student = cursor.fetchall()
             cursor.execute('SELECT * FROM student_details')
-            count[0] = len(cursor.fetchall())      
+            count[0] = len(cursor.fetchall())
             cursor.execute('SELECT * FROM student_details where account_status="allow"')
             count[1] = len(cursor.fetchall())
             cursor.execute('SELECT * FROM student_details where account_status="block"')
@@ -803,7 +824,7 @@ def data_entry_student():
             cursor.execute('SELECT * FROM student_details')
             student = cursor.fetchall()
             cursor.execute('SELECT * FROM student_details')
-            count[0] = len(cursor.fetchall())      
+            count[0] = len(cursor.fetchall())
             cursor.execute('SELECT * FROM student_details where account_status="allow"')
             count[1] = len(cursor.fetchall())
             cursor.execute('SELECT * FROM student_details where account_status="block"')
@@ -821,11 +842,11 @@ def data_entry_student():
 
 
 @app.route('/data_entry/student/select', methods=['GET', 'POST'])
-def data_entry_student_select():   
+def data_entry_student_select():
     cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    if request.method == 'POST': 
+    if request.method == 'POST':
         student_id = request.form['student_id']
-        print(student_id)      
+        print(student_id)
         cur.execute("SELECT * FROM student_details,school_details where student_details.school_id=school_details.school_id and student_id = %s", [student_id])
         rsemployee = cur.fetchall()
         employeearray = []
@@ -838,7 +859,7 @@ def data_entry_student_select():
                     'school_board': rs['school_board'],
                     'school_pincode': rs['school_pincode'],
                     'student_email': rs['student_email'],
-                    'student_grade': rs['student_grade'],             
+                    'student_grade': rs['student_grade'],
                     'student_whatsapp': rs['student_whatsapp'],
                     'student_profile': rs['student_profile'],
                     'account_status': rs['account_status'],
@@ -852,7 +873,7 @@ def data_entry_student_select():
 @app.route("/data_entry/student/change", methods=["POST", "GET"])
 def data_entry_student_change():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    if request.method == "POST":        
+    if request.method == "POST":
         student_id = request.form['student_id']
         student_name = request.form['student_name']
         student_contact = request.form['student_contact']
@@ -881,12 +902,12 @@ def data_entry_student_change():
 
 
 
-        
-       
+
+
         cursor.execute('update student_details set student_name=%s, student_contact = %s ,student_email=%s , student_whatsapp=%s , account_status=%s where student_id=%s',
         [student_name,student_contact,student_email,student_whatsapp,status,student_id])
         mysql.connection.commit()
-    return jsonify('success')   
+    return jsonify('success')
 
 ####################################### Student table end ############################################
 
@@ -904,10 +925,10 @@ def data_entry_school_details():
         count = arr.array('i', [0, 0, 0, 0])
 
         id=session.get('id')
-        status = request.args.get('status')  
+        status = request.args.get('status')
 
         admin_name=session.get('name')
-        if request.method == 'POST':      
+        if request.method == 'POST':
             adminid=session.get('id')
             school_name = request.form['school_name']
             school_state = request.form['school_state']
@@ -915,8 +936,8 @@ def data_entry_school_details():
             school_pincode = request.form['school_pincode']
             school_board = request.form['school_board']
             school_contact = request.form['school_contact']
-           
-           
+
+
             try:
                 cursor.execute("INSERT INTO school_details (school_name, school_state ,school_district,school_pincode,school_board,school_contact) VALUES (%s, %s, %s, %s, %s, %s)",[school_name,school_state,school_district,school_pincode,school_board,school_contact])
                 mysql.connection.commit()
@@ -964,11 +985,11 @@ def data_entry_school_details():
 
 
 @app.route('/data_entry/school_details/select', methods=['GET', 'POST'])
-def data_entry_school_details_select():   
+def data_entry_school_details_select():
     cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    if request.method == 'POST': 
+    if request.method == 'POST':
         school_id = request.form['school_id']
-        print(school_id)      
+        print(school_id)
         cur.execute("SELECT * FROM school_details where school_id = %s", [school_id])
         rsemployee = cur.fetchall()
         employeearray = []
@@ -1012,7 +1033,7 @@ def data_entry_school_details_import():
 @app.route("/data_entry/school_details/change", methods=["POST", "GET"])
 def data_entry_school_change():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    if request.method == "POST":        
+    if request.method == "POST":
         school_id = request.form['school_id']
         print("faculty_id"+ school_id)
         school_name = request.form['school_name']
@@ -1026,7 +1047,7 @@ def data_entry_school_change():
 
         cursor.execute('update school_details set school_name=%s, school_state = %s ,school_district=%s,school_pincode=%s,school_contact=%s,school_status=%s,school_board=%s where school_id=%s', [school_name,school_state,school_district,school_pincode,school_contact,school_status,school_board,school_id])
         mysql.connection.commit()
-    return jsonify('success')   
+    return jsonify('success')
 
 
 
@@ -1047,7 +1068,7 @@ def change_dataentry_password():
 
         cursor.execute('update admin set admin_password =%s where admin_id=%s',(password,id))
         mysql.connection.commit()
-        
+
     return jsonify('success')
 
 ################################end of data entry password change############################
