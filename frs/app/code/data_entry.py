@@ -36,9 +36,14 @@ def data_entry_home():
         rejected = cursor.fetchall()
         cursor.execute('SELECT count(*) as count ,course_code,course_status FROM course_details Where  course_status="pending" and admin_id=%s group by course_code',[id])
         pending =cursor.fetchall()
+        cursor.execute('SELECT sum(nfrs) as frs ,course_code FROM course_details Where admin_id=%s group by course_code',[id])
+        negativefrs =cursor.fetchall()
+        nfrs=[]
+        for i in range(len(negativefrs)):
+            nfrs.append(int(negativefrs[i]['frs']))
         for i in course_faculty:
             course_code.append(str(i['course_code']))
-        return render_template('data_entry/index.html',admin_name=admin_name,count=home,course_faculty=course_code,cc=course_faculty,upcoming_deadline=upcoming_deadline,approved=approved,rejected=rejected,pending=pending)
+        return render_template('data_entry/index.html',admin_name=admin_name,negativefrs=nfrs,count=home,course_faculty=course_code,cc=course_faculty,upcoming_deadline=upcoming_deadline,approved=approved,rejected=rejected,pending=pending)
     else:
         return redirect(url_for('login'))
 
