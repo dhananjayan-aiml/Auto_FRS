@@ -265,7 +265,7 @@
 
                         </select>
                         <br />
-                        <label>Select Lecture </label>
+                        <label>Select LP </label>
                         <!-- <input type="text" name="sname" id="name" class="form-control" /> -->
                         <select name="ln" id="ln" class="form-control">
                             <option value="1">1</option>
@@ -276,12 +276,16 @@
                         </select>
                         <br />
 
-                        <label class="form-label">Enter Lecture Material Link</label>
-                        <input type="text" name="cname" id="lm" class="form-control" />
-                        <br />
-
-                        <label>Enter Lesson Plan Link</label>
+                        <label>Enter Lesson Plan (Drive Link)</label>
                         <input type="text" name="grade" id="lp" class="form-control" />
+
+                        <br />
+                        <div class="mb-3">
+
+                        <label class="form-label">Enter Lecture Material (Drive Link)</label>
+                        <input type="text" name="lm" id="lm" class="form-control"/>
+
+                        </div>
                         <input type="hidden" name="course" value="{{cc}}">
                         <label>Enter Discussion Questions</label>
                         <textarea style="height:100px" type="text" name="duration" class="form-control"></textarea>
@@ -301,7 +305,7 @@
                         <label>Enter Video Link</label>
                         <input type="text" name="coursedes" id="lv" class="form-control" />
                         <br />
-
+                        <input type="file" name="file">
 
                         <input type="hidden" class="form-control" name="test1" id="test1"></input>
 

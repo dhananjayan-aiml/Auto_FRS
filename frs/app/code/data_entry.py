@@ -4,6 +4,8 @@ from datetime import timedelta, datetime
 from re import sub
 import html
 from MySQLdb.cursors import Cursor
+
+
 from app import *
 @app.route("/data_entry/home", methods=["POST", "GET"])
 def data_entry_home():
@@ -13,18 +15,22 @@ def data_entry_home():
 
         home = arr.array('i', [0, 0, 0, 0])
         admin_name=session.get('name')
-        cursor.execute('SELECT * FROM course_details')
+        cursor.execute('SELECT * FROM course_details where admin_id=%s',[id])
         home[0] = len(cursor.fetchall())
+        #faculty id
+        cursor.execute('select distinct(faculty_id) from course_faculty where admin_id=%s',[id])
+        fid=cursor.fetchall()
+        fid=fid[0]['faculty_id']
 
-        cursor.execute('SELECT * FROM course_details where course_status="approved"')
+        cursor.execute('SELECT * FROM course_details where course_status="approved" and admin_id=%s',[id])
         home[1] = len(cursor.fetchall())
-        cursor.execute('SELECT nfrs FROM faculty_details where faculty_id=4')
+        cursor.execute('SELECT nfrs FROM faculty_details where faculty_id=%s',[fid])
         home[2] = cursor.fetchall()[0]['nfrs']
-        cursor.execute('SELECT * FROM course_details where course_status="rejected"')
+        cursor.execute('SELECT * FROM course_details where course_status="rejected" and admin_id=%s',[id])
         home[3] = len(cursor.fetchall())
         # cursor.execute('SELECT * FROM notification,admin where notification_from=admin.admin_id and notification.admin_id=%s and notification_status="unread" LIMIT 4',[id])
         # notifi = cursor.fetchall()
-        cursor.execute('SELECT course_code from course_faculty')
+        cursor.execute('SELECT course_code from course_faculty where admin_id=%s',[id])
         course_faculty = cursor.fetchall()
         course_code = []
         cursor.execute('select * from time_table where admin_id=%s and ((uploaded_time is NULL) or (deadline !=0))',[id])
@@ -40,7 +46,10 @@ def data_entry_home():
         negativefrs =cursor.fetchall()
         nfrs=[]
         for i in range(len(negativefrs)):
-            nfrs.append(int(negativefrs[i]['frs']))
+            if negativefrs[i]['frs'] == None:
+                nfrs.append(0)
+            else:
+                nfrs.append(int(negativefrs[i]['frs']))
         for i in course_faculty:
             course_code.append(str(i['course_code']))
         return render_template('data_entry/index.html',admin_name=admin_name,negativefrs=nfrs,count=home,course_faculty=course_code,cc=course_faculty,upcoming_deadline=upcoming_deadline,approved=approved,rejected=rejected,pending=pending)
@@ -123,7 +132,7 @@ def data_entry_course():
         # admin_name=session.get('name')
         # subject_id = request.args.get('course_id')
 
-        cursor.execute('SELECT course_code from course_faculty')
+        cursor.execute('SELECT course_code from course_faculty where admin_id=%s',[id])
         course_faculty = cursor.fetchall()
         course_code =[]
         cc=request.args.get('a')
@@ -159,29 +168,33 @@ def data_entry_course():
 
             # adminid=session.get('id')
             subjectid = request.form['subjectid']
-            cname = request.form['cname']
+            lm = request.form['lm']
             ln=request.form['ln']
-            #
-            # filename, extension = os.path.split(file.filename)
+
 
             grade = request.form['grade']
             cduration = request.form['duration']
             nosession = request.form['session']
             description = request.form['coursedes']
-            cname_x = cname.rfind('/')
             des_x = description.rfind('/')
-            cname = cname[:cname_x]+"/preview"
+            lm_x = lm.rfind('/')
             description = description[:des_x]+"/preview"
+            lm = lm[:lm_x] + "/preview"
 
+            # file=request.files['file']
+            # filename, extension = os.path.split(file.filename)
             # basepath = os.path.dirname(__file__)
             # file_path = os.path.join(basepath, secure_filename(file.filename))
-
+            #
             # file = secure_filename(file.filename)
             # file.save(os.path.join(app.root_path, f'static/uploads/pdf/{subjectid}-{grade}.{extension}'))
             # student_id = "uploads/pdf/{0}-{1}.pdf".format(subjectid, grade)
+
+            # lm_file_pdf.save(os.path.join(app.root_path, f'static/uploads/lectureMaterial/Unit{subjectid}-{ln}.pdf'))
+            # lm_file = "uploads/lectureMaterial/Unit{0}-{1}.pdf".format(subjectid, ln)
             try:
                 if len(time_table)>0:
-                    cursor.execute("INSERT INTO course_details (subject_id, course_grade,course_name,course_description,course_duration,no_of_session,l_name,admin_id,course_code) VALUES (%s, %s, %s, %s, %s, %s,%s,%s,%s)",[subjectid, grade,cname,description,cduration,nosession,ln,id,course,])
+                    cursor.execute("INSERT INTO course_details (subject_id, course_grade,course_name,course_description,course_duration,no_of_session,l_name,admin_id,course_code) VALUES (%s, %s, %s, %s, %s, %s,%s,%s,%s)",[subjectid, grade,lm,description,cduration,nosession,ln,id,course,])
                     mysql.connection.commit()
                     return jsonify('success')
                 else:
