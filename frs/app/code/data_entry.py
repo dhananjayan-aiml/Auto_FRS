@@ -186,14 +186,14 @@ def data_entry_course():
             files1 = request.files.getlist('lm')
             print(request.files)
             for file in files1:
-                lm = f'static/uploads/lectureMaterial/U{subjectid}-L{ln}-{file.filename}'
+                lm = f'static/uploads/lectureMaterial/U{subjectid}-L{ln}-{course}-{file.filename}'
 
             #lesson plan file saving
 
             files2 = request.files.getlist('grade')
             print(request.files)
             for file in files2:
-                grade = f'static/uploads/lessonPlan/U{subjectid}-L{ln}-{file.filename}'
+                grade = f'static/uploads/lessonPlan/U{subjectid}-L{ln}-{course}-{file.filename}'
 
             # file=request.files['file']
             # basepath = os.path.dirname(__file__)
@@ -212,11 +212,11 @@ def data_entry_course():
                     for file in files1:
                         print(file.filename)
                         file.save(os.path.join(app.root_path,
-                                               f'static/uploads/lectureMaterial/U{subjectid}-L{ln}-{file.filename}'))
+                                               f'static/uploads/lectureMaterial/U{subjectid}-L{ln}-{course}-{file.filename}'))
                     for file in files2:
                         print(file.filename)
                         file.save(os.path.join(app.root_path,
-                                               f'static/uploads/lessonPlan/U{subjectid}-L{ln}-{file.filename}'))
+                                               f'static/uploads/lessonPlan/U{subjectid}-L{ln}-{course}-{file.filename}'))
                     return jsonify('success')
                 else:
                     return jsonify('error_duplicate')
