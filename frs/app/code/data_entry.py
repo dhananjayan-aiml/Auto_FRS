@@ -164,25 +164,38 @@ def data_entry_course():
                 elif (wiki_deadline + timedelta(days=-10, hours=0)) < current_time:#between first and second deadline
                     time_id = time_table[0]['time_id']
                     cursor.execute('update time_table set uploaded_time=CURRENT_TIMESTAMP,deadline=1 where time_id=%s', [time_id])
-                    cursor.execute('update deadline set deadline1_date=CURRENT_TIMESTAMP where time_id=%s', [time_id])
+                    # cursor.execute('update deadline set deadline1_date=CURRENT_TIMESTAMP where time_id=%s', [time_id])
 
             # adminid=session.get('id')
             subjectid = request.form['subjectid']
-            lm = request.form['lm']
+            # lm = request.form['lm']
             ln=request.form['ln']
 
 
-            grade = request.form['grade']
+            # grade = request.form['grade']
             cduration = request.form['duration']
             nosession = request.form['session']
             description = request.form['coursedes']
             des_x = description.rfind('/')
-            lm_x = lm.rfind('/')
+            # lm_x = lm.rfind('/')
             description = description[:des_x]+"/preview"
-            lm = lm[:lm_x] + "/preview"
+            # lm = lm[:lm_x] + "/preview"
+
+            #lecture material file saving
+
+            files1 = request.files.getlist('lm')
+            print(request.files)
+            for file in files1:
+                lm = f'static/uploads/lectureMaterial/U{subjectid}-L{ln}-{file.filename}'
+
+            #lesson plan file saving
+
+            files2 = request.files.getlist('grade')
+            print(request.files)
+            for file in files2:
+                grade = f'static/uploads/lessonPlan/U{subjectid}-L{ln}-{file.filename}'
 
             # file=request.files['file']
-            # filename, extension = os.path.split(file.filename)
             # basepath = os.path.dirname(__file__)
             # file_path = os.path.join(basepath, secure_filename(file.filename))
             #
@@ -196,6 +209,14 @@ def data_entry_course():
                 if len(time_table)>0:
                     cursor.execute("INSERT INTO course_details (subject_id, course_grade,course_name,course_description,course_duration,no_of_session,l_name,admin_id,course_code) VALUES (%s, %s, %s, %s, %s, %s,%s,%s,%s)",[subjectid, grade,lm,description,cduration,nosession,ln,id,course,])
                     mysql.connection.commit()
+                    for file in files1:
+                        print(file.filename)
+                        file.save(os.path.join(app.root_path,
+                                               f'static/uploads/lectureMaterial/U{subjectid}-L{ln}-{file.filename}'))
+                    for file in files2:
+                        print(file.filename)
+                        file.save(os.path.join(app.root_path,
+                                               f'static/uploads/lessonPlan/U{subjectid}-L{ln}-{file.filename}'))
                     return jsonify('success')
                 else:
                     return jsonify('error_duplicate')

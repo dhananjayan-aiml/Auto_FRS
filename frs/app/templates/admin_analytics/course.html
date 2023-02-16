@@ -200,10 +200,10 @@
           <!--        "city": "{{row.course_code}}",-->
           "unit": "U{{row.subject_id}}",
            "age": `<a type="button" data-toggle="modal"
-                            data-target="#lpmodal{{row.course_id}}">
+                            data-target="#lmmodal{{row.course_id}}">
                             <span class="text_blue">LM{{row.l_name}}</span>
                         </a>
-                        <div class="modal fade" id="lpmodal{{row.course_id}}" tabindex="-1" role="dialog" aria-labelledby="lpmodal" aria-hidden="true">
+                        <div class="modal fade" id="lmmodal{{row.course_id}}" tabindex="-1" role="dialog" aria-labelledby="lmmodal" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-xl" role="document" >
     <div class="modal-content ">
       <div class="modal-header">
@@ -213,14 +213,34 @@
         </button>
       </div>
       <div class="modal-body">
-          <iframe  src="{{row.course_name}}" title="Lecture material" width="100%" height="800" allow="autoplay" ></iframe>
+          <iframe  src="../../{{row.course_name}}" title="Lecture material" width="100%" height="700" allow="autoplay" ></iframe>
       </div>
     </div>
   </div>
 </div>
                         <input class='custom-input ' type='checkbox' id='check1' name='option1{{loop.index}}' value='10' >`,
+"grade": `<a type="button" data-toggle="modal"
+                            data-target="#lpmodal{{row.course_id}}">
+                            <span class="text_blue">LP{{row.l_name}}</span>
+                        </a>
+                        <div class="modal fade" id="lpmodal{{row.course_id}}" tabindex="-1" role="dialog" aria-labelledby="lpmodal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl" role="document" >
+    <div class="modal-content ">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Unit {{row.subject_id}} - Lesson Plan {{row.l_name}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <iframe  src="../../{{row.course_grade}}" title="Lecture material" width="100%" height="700" allow="autoplay" ></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+                       <input class='custom-input' type='checkbox' id='check2' name='option2{{loop.index}}' value='10' >`,
 
-          "grade": "<a href='{{row.course_grade}}' target='_blank' > LP{{row.l_name}}</a><input class='custom-input' type='checkbox' id='check2' name='option2{{loop.index}}' value='10' >",
+<!--          "grade": "<a href='{{row.course_grade}}' target='_blank' > LP{{row.l_name}}</a><input class='custom-input' type='checkbox' id='check2' name='option2{{loop.index}}' value='10' >",-->
         "lv": `<a type="button" data-toggle="modal"
                             data-target="#lvmodal{{row.course_id}}">
                             <span class="text_blue">LV{{row.l_name}}</span>
@@ -235,7 +255,7 @@
         </button>
       </div>
       <div class="modal-body">
-          <iframe  src="{{row.course_description}}" title="Lecture material" width="100%" height="800" allow="autoplay" ></iframe>
+          <iframe  src="{{row.course_description}}" title="Lecture material" width="100%" height="700" allow="autoplay" ></iframe>
       </div>
     </div>
   </div>

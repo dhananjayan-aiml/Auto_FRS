@@ -255,7 +255,7 @@
 
                 </div>
                 <div class="modal-body">
-                    <form method="post" id="insert_form" enctype="multipart/form-data">
+                     <form method="post" enctype="multipart/form-data">
                         <label>Select Unit</label>
                         <!-- <input type="text" name="sname" id="name" class="form-control" /> -->
                         <select name="subjectid" id="status" class="form-control">
@@ -276,14 +276,14 @@
                         </select>
                         <br />
 
-                        <label>Enter Lesson Plan (Drive Link)</label>
-                        <input type="text" name="grade" id="lp" class="form-control" />
+                        <label>Enter Lesson Plan (PDF)</label>
+                        <input type="file" name="grade" id="lp" class="form-control" multiple/>
 
                         <br />
                         <div class="mb-3">
 
-                        <label class="form-label">Enter Lecture Material (Drive Link)</label>
-                        <input type="text" name="lm" id="lm" class="form-control"/>
+                        <label class="form-label">Enter Lecture Material (PDF)</label>
+                        <input type="file" name="lm" id="lm" class="form-control" multiple/>
 
                         </div>
                         <input type="hidden" name="course" value="{{cc}}">
@@ -305,7 +305,7 @@
                         <label>Enter Video Link</label>
                         <input type="text" name="coursedes" id="lv" class="form-control" />
                         <br />
-                        <input type="file" name="file">
+<!--                        <input type="file" name="file" multiple>-->
 
                         <input type="hidden" class="form-control" name="test1" id="test1"></input>
 
@@ -585,30 +585,15 @@
 
                         document.body.removeChild(link);
                     };
-                    const table = document.getElementById('dataTable');
-                    const exportBtn = document.getElementById('export');
 
-                    exportBtn.addEventListener('click', function () {
-                        // Export to csv
-                        const csv = toCsv(table);
-
-                        // Download it
-                        download(csv, 'download.csv');
-                    });
-                </script>
-
-                <script>
-                    var edit = CKEDITOR.replace('address');
-
-                    edit.on('change', function (evt) {
-                        // console.log(evt.editor.getData());
-                        $('#test1').val(evt.editor.getData());
-                    });
                 </script>
 
 
-                <script
-                    src="https://gitcdn.xyz/repo/FuriosoJack/TableHTMLExport/v1.0.0/src/tableHTMLExport.js"></script>
+
+
+<!--                <script-->
+<!--                    src="https://gitcdn.xyz/repo/FuriosoJack/TableHTMLExport/v1.0.0/src/tableHTMLExport.js"></script>-->
+                <script src="https://rawcdn.githack.com/FuriosoJack/TableHTMLExport/v2.0.0/src/tableHTMLExport.js"></script>
 
 
                 <script>

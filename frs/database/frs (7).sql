@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 15, 2023 at 11:41 AM
+-- Generation Time: Feb 16, 2023 at 06:30 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -116,7 +116,7 @@ INSERT INTO `course_details` (`course_id`, `subject_id`, `course_description`, `
 (25, 5, 'https://drive.google.com/file/d/1wggpQ27JHmK7tYkvDSkx9SoFOVidDyOH/preview', 'demo time', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-08 09:43:34', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1qUhuHu19_9zh-6bj_OMfiAgfDavLm_3S/preview', '1', '212AM101', NULL),
 (26, 4, 'https://drive.google.com/file/d/1wggpQ27JHmK7tYkvDSkx9SoFOVidDyOH/preview', 'demo duplicate', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-08 09:45:30', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview', '1', '212AM101', NULL),
 (27, 2, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', 'demo time2', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-08 09:51:46', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1qUhuHu19_9zh-6bj_OMfiAgfDavLm_3S/preview', '1', '212AM101', NULL),
-(28, 2, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', '234', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-08 17:33:42', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview', '3', '212AM101', NULL),
+(28, 2, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', '234', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'rejected', ' Rejected entries : Unit-2 --> LectureMaterial-3 | DiscourseLink-3 | DiscussionQuestion-3 | poda po ', '2023-02-08 17:33:42', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview', '3', '212AM101', 30),
 (29, 2, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', 'w2erdf', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-08 17:49:51', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview', '3', '212AM202', NULL),
 (30, 3, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', 'q23r', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-08 17:55:15', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview', '3', '212AM202', NULL),
 (31, 4, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', 'awefd', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'rejected', ' Rejected entries : Unit-4 --> LectureVideo-3 | DiscourseLink-3 | DiscussionQuestion-3 |  ', '2023-02-08 18:06:39', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview', '3', '212AM202', 30),
@@ -126,7 +126,15 @@ INSERT INTO `course_details` (`course_id`, `subject_id`, `course_description`, `
 (35, 5, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', 'sdaf', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'rejected', ' Rejected entries : Unit-5 --> LectureMaterial-5 | LessonPlan-5 | LectureVideo-5 | DiscourseLink-5 | DiscussionQuestion-5 |  ', '2023-02-09 03:28:08', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview', '5', '212AM101', 50),
 (36, 5, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', 'wdtgh ', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'rejected', ' Rejected entries : Unit-5 --> LectureMaterial-5 | LessonPlan-5 | LectureVideo-5 | DiscourseLink-5 | DiscussionQuestion-5 |  ', '2023-02-09 04:02:31', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview', '5', '212AM101', 50),
 (37, 5, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', 'asdfasdf', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'rejected', ' Rejected entries : Unit-5 --> DiscussionQuestion-5 |  ', '2023-02-09 04:22:08', 1, 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview', '5', '212AM101', 10),
-(38, 3, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', '124', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'rejected', ' Rejected entries : Unit-3 --> DiscourseLink-3 | DiscussionQuestion-3 | Discourse Link not in format and discussion question not updataed ', '2023-02-15 05:57:47', 2, 'https://drive.google.com/file/d/1QkyDVIdwT51PvOhLKwl_7aC62BS3DhR7/view?usp=sharing', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview', '3', '212AD205', 20);
+(38, 3, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', '124', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'rejected', ' Rejected entries : Unit-3 --> DiscourseLink-3 | DiscussionQuestion-3 | Discourse Link not in format and discussion question not updataed ', '2023-02-15 05:57:47', 2, 'https://drive.google.com/file/d/1QkyDVIdwT51PvOhLKwl_7aC62BS3DhR7/view?usp=sharing', 'https://drive.google.com/file/d/1ar3Mv81SdD5223NvGrPaotNOJbdHYAeC/preview', '3', '212AD205', 20),
+(39, 4, 'asd/preview', 'asdf', 'asdf', 'pending', '-', '2023-02-16 04:04:23', 1, 'asdf', 'asd/preview', '3', '212AM101', NULL),
+(40, 1, 'asd/preview', 'k', 'asdf', 'pending', '-', '2023-02-16 04:09:13', 1, 'asdf', 'asd/preview', '1', '212AM101', NULL),
+(41, 5, 'sd/preview', 'sch', 'sdf', 'pending', '-', '2023-02-16 04:16:11', 1, 'asdf', 'asd/preview', '4', '212AM101', NULL),
+(42, 2, 'asd/preview', 'asdf', 'asdf', 'pending', '-', '2023-02-16 04:39:02', 1, 'asdf', 'static/uploads/lectureMaterial/U2-L3-.lp.pdf', '3', '212AM101', NULL),
+(43, 4, 'asd/preview', 'asdf', 'asasdf', 'pending', '-', '2023-02-16 04:42:31', 1, 'asdf', 'static/uploads/lectureMaterial/U2-L2-.212-al114-Assignment Series - 75.docx.pdf', '3', '212AM101', NULL),
+(44, 2, 'asd/preview', 'asdf', 'asdf', 'pending', '-', '2023-02-16 04:44:32', 1, 'asdf', 'static/uploads/lectureMaterial/U2-L2-.212-al114-Assignment Series - 75.docx.pdf', '2', '212IT101', NULL),
+(45, 2, 'asd/preview', 'asdf', 'asdf', 'pending', '-', '2023-02-16 04:46:38', 1, 'asdf', 'static/uploads/lectureMaterial/U2-L2-.212-al114-Assignment Series - 75.docx.pdf', '2', '212IT101', NULL),
+(46, 3, 'https://drive.google.com/file/d/1gmv6jj8HO0YoEVJAsKO-f_nxZc9xlU7b/preview', 'asdf', 'https://www.w3schools.com/cssref/pr_background-repeat.php', 'pending', '-', '2023-02-16 05:15:26', 2, 'static/uploads/lessonPlan/U3-L3-lp.pdf', 'static/uploads/lectureMaterial/U3-L3-Blue Modern Company Profile Presentation.pdf', '3', '212AD205', NULL);
 
 -- --------------------------------------------------------
 
@@ -198,27 +206,6 @@ INSERT INTO `course_session_details` (`session_id`, `course_id`, `session_durati
 -- --------------------------------------------------------
 
 --
--- Table structure for table `deadline`
---
-
-CREATE TABLE `deadline` (
-  `admin_id` int(50) NOT NULL,
-  `time_id` int(255) NOT NULL,
-  `deadline1_date` timestamp NULL DEFAULT NULL,
-  `deadline2_date` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `deadline`
---
-
-INSERT INTO `deadline` (`admin_id`, `time_id`, `deadline1_date`, `deadline2_date`) VALUES
-(1, 1, NULL, NULL),
-(1, 2, NULL, NULL);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `department`
 --
 
@@ -276,7 +263,7 @@ CREATE TABLE `faculty_details` (
 INSERT INTO `faculty_details` (`faculty_id`, `faculty_name`, `faculty_email`, `faculty_contact`, `faculty_timestamp`, `nfrs`, `admin_id`) VALUES
 (1, 'anooshkavin', 'anooshkavin@gmail.com', '9562513517', '2021-05-27 05:54:05', 0, 5),
 (2, 'gokul', 'gokul.al21@bitsathy.ac.in', '1234567890', '2023-02-14 05:03:39', 0, 2),
-(4, 'kishore', 'nirmalkumar.al21@bitsathy.ac.in', '9787688154', '2021-06-02 04:29:48', 580, 1),
+(4, 'kishore', 'dhananjayanv.al21@bitsathy.ac.in', '9787688154', '2021-06-02 04:29:48', 610, 1),
 (5, 'sad', 'asdasd@kflg.com', '97876881544', '2021-06-03 10:52:25', 0, 7);
 
 -- --------------------------------------------------------
@@ -423,7 +410,7 @@ INSERT INTO `time_table` (`time_id`, `admin_id`, `course_code`, `unit`, `lp_no`,
 (1, 1, '212AM101', 2, 1, '2023-02-19 18:30:00', '2023-02-08 09:51:46', 0),
 (2, 1, '212AM202', 4, 4, '2023-02-09 18:30:00', '2023-02-08 18:18:08', 0),
 (3, 1, '212AM101', 5, 5, '2023-02-14 18:30:00', '2023-02-09 04:22:08', 1),
-(4, 1, '212IT101', 2, 2, '2023-02-23 05:52:04', NULL, 0),
+(4, 1, '212IT101', 2, 2, '2023-02-23 05:52:04', '2023-02-16 04:46:38', 1),
 (5, 2, '212AD205', 3, 3, '2023-02-23 05:52:04', NULL, 0);
 
 --
@@ -542,7 +529,7 @@ ALTER TABLE `course_dept`
 -- AUTO_INCREMENT for table `course_details`
 --
 ALTER TABLE `course_details`
-  MODIFY `course_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `course_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `course_enroll_details`

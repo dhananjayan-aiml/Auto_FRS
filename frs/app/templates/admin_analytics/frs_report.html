@@ -7,13 +7,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bootstrap Table</title>
-<style>
-  #gr{
-  position:absolute;
-  right:50px;
-  top:15px;
-  }
-</style>
+  <style>
+    #gr {
+      position: absolute;
+      right: 50px;
+      top: 15px;
+    }
+  </style>
 
 
 
@@ -34,7 +34,9 @@
 
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Negative FRS Report</h1>
-    <p class="mb-4">To Export the content from the table you can click the option <img src="../../static/img/dropdown.png" style="box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);"alt="drop down img"> on top right corner above the table
+    <p class="mb-4">To Export the content from the table you can click the option <img
+        src="../../static/img/dropdown.png" style="box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);" alt="drop down img"> on
+      top right corner above the table
 
     </p>
 
@@ -43,7 +45,7 @@
 
       <div class="table-responsive">
 
-<p id="gr">Generate Report</p>
+        <p id="gr">Generate Report</p>
         <table class="table table-bordered" width="auto" cellspacing="0" data-show-export="true" id="table"
           data-pagination="True" data-show-filter-control-switch="true" data-click-to-select="true" data-toggle="Table"
           data-filter-control="true">
@@ -120,18 +122,18 @@
 
   <script>
     var data = [
-        {% for row in frs %}
-        {
-        "id": "{{loop.index}}",
+      {% for row in frs %}
+    {
+      "id": "{{loop.index}}",
         "faculty_name": "{{row.faculty_name}}",
-        "faculty_id": "{{row.admin_id}}",
-        "courseCode":"{{row.course_code}}",
-        "rejected": "{{row.course_enroll_status}}",
-        "nfrs": "{{row.nfrs}}",
+          "faculty_id": "{{row.admin_id}}",
+            "courseCode": "{{row.course_code}}",
+              "rejected": "{{row.course_enroll_status}}",
+                "nfrs": "{{row.nfrs}}"
 
 
-      },
-      {% endfor %}
+    },
+    {% endfor %}
     ];
 
     var $table = $('#table')
@@ -157,7 +159,7 @@
 
 
       },
-  }
+  
 
     })
 
