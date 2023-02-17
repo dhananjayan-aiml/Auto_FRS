@@ -7,6 +7,65 @@ from MySQLdb.cursors import Cursor
 
 
 from app import *
+@app.route("/data_entry/addCourse", methods=["POST", "GET"])
+def add_course():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    if 'id' in session and session.get("user_type") == 'data_entry':
+        id = session.get('id')
+        cursor.execute('SELECT course_code from course_faculty where admin_id=%s and lp_hours!=0', [id])
+        course_faculty = cursor.fetchall()
+        course_code=[]
+        for i in course_faculty:
+            course_code.append(str(i['course_code']))
+        print(course_code)
+        cursor.execute("select course_code from course_faculty where admin_id=%s and (unit_1 is NULL or unit_2 is NULL or unit_3 is NULL or unit_4 is NULL or unit_5 is NULL )",[id])
+        course_opt=cursor.fetchall()
+        course_opt_faculty=[]
+        cursor.execute("select * from course_faculty where admin_id=%s and (unit_1 is NULL or unit_2 is NULL or unit_3 is NULL or unit_4 is NULL or unit_5 is NULL )",[id])
+        count = cursor.fetchall()
+        print(count)
+        dict={}
+        empty_dict=[]
+        for i in count:
+            list=[]
+            for j in i:
+                if i[j]==None:
+                    list.append(j)
+            dict[i['course_code']]=list
+        for i in course_opt:
+            course_opt_faculty.append(str(i['course_code']))
+        if request.method == 'POST':
+            course=request.form['course']
+            no_lp = int(request.form['no_lp'])
+            cursor.execute("select lp_hours from course_faculty where admin_id=%s and course_code=%s",[id,course])
+            no_lp_db=cursor.fetchone()
+            no_lp_db=no_lp_db['lp_hours']
+            unit=[]
+            sum_l_hours=0
+            for i in dict[course]:
+                try:
+                    unit.append(int(request.form[i]))
+                    sum_l_hours+=int(request.form[i])
+                except Exception as e:
+                    unit.append(None)
+            print(dict,"dict")
+            print(unit,"unit ","sum ",sum_l_hours)
+            if max(no_lp_db,no_lp)==2:
+                exact_lp=15
+            else:
+                exact_lp=22
+            if sum_l_hours<=exact_lp:
+                print(unit,"inside if")
+                for k in range(len(unit)):
+                    if unit[k]==None:
+                        continue
+                    print(k,unit[k],id,course)
+                    cursor.execute(f"update course_faculty set unit_{k+1} = {unit[k]} where admin_id={id} and course_code='{course}'")
+                    mysql.connection.commit()
+            else:
+                return jsonify("error")
+            print(course,no_lp)
+    return render_template("data_entry/addCourse.html",course_faculty=course_code,course_opt=course_opt_faculty,dict=dict,empty_dict=empty_dict)
 @app.route("/data_entry/home", methods=["POST", "GET"])
 def data_entry_home():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
@@ -30,7 +89,7 @@ def data_entry_home():
         home[3] = len(cursor.fetchall())
         # cursor.execute('SELECT * FROM notification,admin where notification_from=admin.admin_id and notification.admin_id=%s and notification_status="unread" LIMIT 4',[id])
         # notifi = cursor.fetchall()
-        cursor.execute('SELECT course_code from course_faculty where admin_id=%s',[id])
+        cursor.execute('SELECT course_code from course_faculty where admin_id=%s and lp_hours!=0', [id])
         course_faculty = cursor.fetchall()
         course_code = []
         cursor.execute('select * from time_table where admin_id=%s and ((uploaded_time is NULL) or (deadline !=0))',[id])
@@ -132,7 +191,7 @@ def data_entry_course():
         # admin_name=session.get('name')
         # subject_id = request.args.get('course_id')
 
-        cursor.execute('SELECT course_code from course_faculty where admin_id=%s',[id])
+        cursor.execute('SELECT course_code from course_faculty where admin_id=%s and lp_hours!=0', [id])
         course_faculty = cursor.fetchall()
         course_code =[]
         cc=request.args.get('a')

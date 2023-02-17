@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include 'header/data_entry_header.html' %}
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+
+<body id="page-top">
+  <div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Add Course</h1>
+    </div>
+
+    <div class="d-sm-flex align-items-start mb-4">
+      <h3 class="h5 mb-0 text-gray-800">Enter the Course , Lecture hours and Number of Lectures per Unit </h3><br>
+    </div>
+    <form method="post">
+      <div class="d-sm-flex align-items-start justify-content-md-around mb-4">
+        <div class="dropdown">
+          <label for="course" class="h3 text-gray-800">Select Course : </label>
+          <select name="course" class="btn btn-primary dropdown-toggle mb-2" type="button" id="course">
+            <option>-- select --</option>
+            {%for i in course_opt%}
+            <option class="btn-light " type="button">{{i}}</option>
+            {%endfor%}
+          </select>
+        </div>
+        <div class="dropdown" id="lp_drop">
+          <label for="lp" id="label" class="h3 text-gray-800">Select Lecture Hours : &nbsp; </label>
+          <select name="no_lp" class="btn btn-primary dropdown-toggle mb-2" type="button" id="lp">
+            <option value="0">--select--</option>
+            <option class="btn-light " type="button" value="2">2</option>
+            <option class="btn-light " type="button" value="3">3</option>
+          </select>
+        </div>
+      </div>
+      <div id="div"> Lp Count</div>
+      <script>
+        var label = document.getElementById('label')
+        var selected = document.getElementById('course');
+        var changed = document.getElementById('lp_drop');
+        var arr = [];
+        {%for i in course_faculty %}
+        arr.push('{{i}}')
+        {% endfor %}
+        console.log(arr);
+        selected.addEventListener('change', function () {
+          if (arr.includes(selected.value)) {
+            changed.style.display = 'none';
+            console.log("ing ig");
+          }
+          else {
+            changed.style.display = 'flex';
+            console.log("ing elig");
+          }
+            let dict_arr=[];
+      {%for i in dict%}
+      if('{{i}}'==selected.value){
+      {%for j in dict[i]%}
+        dict_arr.push('{{j}}');
+       {%endfor%}
+      }
+      {%endfor%}
+      console.log(dict_arr);
+      var parent=document.getElementById('div');
+      parent.innerHTML=" ";
+      for(let i of dict_arr){
+      let code="";
+      code+=`<div class="col-xl-11 col-md-6 mb-4 ml-5" style="max-width:90%">
+        <div class="card border-left-primary shadow ">
+          <div class="card-body">
+            <div class="column  align-items-center">
+              <div class="mr-2">
+                <div class="h5 mb-0 font-weight-bold text-gray-800 " style="display:flex;justify-content:space-around;">
+                  <h4 class="text-gray-800 mr-5">`+i+`</h4>`;
+           for( let j=2;j<7;j++){
+                 code+=`<div class="form-check ">
+                    <input class="form-check-input mt-2 p-2" style="scale:2;" type="radio" name="`+i+`"
+                      id="`+i+j+`" value="`+j+`">
+                    <label class="form-check-label h4" for="`+i+j+`">`+j+` </label>
+                  </div>`;
+               }
+             code+=`</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>`;
+      parent.innerHTML+=code;
+      }
+});
+      </script>
+
+<!--      {%for i in empty_dict%}-->
+<!--      <div class="col-xl-11 col-md-6 mb-4 ml-5" style="max-width:90%">-->
+<!--        <div class="card border-left-primary shadow ">-->
+<!--          <div class="card-body">-->
+<!--            <div class="column  align-items-center">-->
+<!--              <div class="mr-2">-->
+<!--                <div class="h5 mb-0 font-weight-bold text-gray-800 d-sm-flex justify-content-around">-->
+<!--                  <h4 class="text-gray-800 mr-5">{{i}}</h4>-->
+<!--                  {%for j in range(2,7)%}-->
+<!--                  <div class="form-check ">-->
+<!--                    <input class="form-check-input mt-2 p-2" style="scale:2;" type="radio" name="unit{{i}}"-->
+<!--                      id="unit{{i}}{{j}}" value="{{j}}">-->
+<!--                    <label class="form-check-label h4" for="unit{{i}}{{j}}">-->
+<!--                      &nbsp;{{j}}-->
+<!--                    </label>-->
+<!--                  </div>-->
+<!--                  {%endfor%}-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      {%endfor%}-->
+      <button type="submit" class="btn btn-primary mb-5" style="margin-left:87%">submit</button>
+    </form>
+  </div>
+
+  <!--  unit 1 to 5-->
+  <!--  {%for i in range(1,6)%}-->
+  <!--  <div class="d-sm-flex align-item-center justify-content-around mb-4 card shadow " id="unit{{i}}">-->
+  <!--    <h4 class="text-gray-800">Unit {{i}}</h4>-->
+  <!--    {%for j in range(2,7)%}-->
+  <!--    <div class="form-check">-->
+  <!--      <input class="form-check-input mt-2" style="scale:2;" type="radio" name="unit{{i}}" id="unit{{i}}{{j}}" value="{{j}}">-->
+  <!--      <label class="form-check-label h4" for="unit{{i}}{{j}}">-->
+  <!--        &nbsp;{{j}}-->
+  <!--      </label>-->
+  <!--    </div>-->
+  <!--    {%endfor%}-->
+  <!--  </div>-->
+  <!--{%endfor%}-->
+
+</body>
+<script type="text/javascript" src="https://cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
+<script src="https://rawcdn.githack.com/FuriosoJack/TableHTMLExport/v2.0.0/src/tableHTMLExport.js"></script>
+
+</html>
